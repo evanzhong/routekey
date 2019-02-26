@@ -41,6 +41,11 @@ app.get('/', (req, res) => {
     res.sendFile(home);
 });
 
+// for specific keys
+app.get('/:key', (req, res) => {
+    const key = req.params.key;
+});
+
 app.post('/new-route', (req, res) => {
     // for debugging
     console.log("Route submitted: " + req.body.url);

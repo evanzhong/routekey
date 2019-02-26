@@ -6,6 +6,8 @@ const dbURL = process.env.DATABASE;
 const path = require('path');
 const parse = require('body-parser');
 const express = require('express');
+const urlModule = require('url');
+const _ = require('lodash');
 
 const app = express();
 
@@ -22,8 +24,14 @@ MongoClient.connect(dbURL, { useNewUrlParser: true })
 
 const writeRoute = (db, url) => {
   const routes = db.collection('routes-and-keys');
-  const potentialKeys = db.collection('list-of-keys');
-  const selectedKey = potentialKeys.find({"inUse": false}).limit(1).skip(Math.floor(Math.random() * potentialKeys.count({"inUse": false})));
+  const potentialKeys = db.collection('list-of-free-keys');
+  const usedKeys = db.collection('keys-in-use');
+//   const randIndex = Math.floor(Math.random() * potentialKeys.countDocuments());
+    const randIndex = potentialKeys.countDocuments({"inUse": false});
+    console.log(randIndex)
+  const selectedKey = potentialKeys.find().limit( -1 ).skip(randIndex);
+  console.log(selectedKey);
+//   Change the below to delete and insert the value into keys-in-use
   potentialKeys.findOneAndUpdate({_id: selectedKey._id},
     {
         $setOnInsert: {
@@ -80,14 +88,17 @@ app.post('/new-route', (req, res) => {
     
     let route;
     try {
-        route = new URL(req.body.url);
+        route = urlModule.parse(req.body.url);
+        console.log("try catch generated: " + route);
     } catch (err) {
+        console.log("Error in try catch");
         return res.status(400).send({error: 'invalid URL'});
     }
     const { db } = req.app.locals;
     writeRoute(db, route.href)
       .then(result => {
         const doc = result.value;
+        console.log(doc);
         res.json({
           route: doc.route,
           key: doc.key,

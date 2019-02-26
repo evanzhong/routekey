@@ -16,17 +16,34 @@ app.use(parse.json());
 MongoClient.connect(dbURL, { useNewUrlParser: true })
   .then(client => {
     app.locals.db = client.db('routekey');
-    console.log("DB connection succesful")
+    console.log("DB connection succesful at " + dbURL)
   })
   .catch(() => console.error('DB connection failed :('));
 
 const writeRoute = (db, url) => {
   const routes = db.collection('routes-and-keys');
-  return routes.findOneAndUpdate({ route: url },
+  const potentialKeys = db.collection('list-of-keys');
+  const selectedKey = potentialKeys.find({"inUse": false}).limit(1).skip(Math.floor(Math.random() * potentialKeys.count({"inUse": false})));
+  potentialKeys.findOneAndUpdate({_id: selectedKey._id},
+    {
+        $setOnInsert: {
+            _id: selectedKey._id,
+            num: selectedKey.num,
+            word: selectedKey.word,
+            inUse: true
+        },
+    },
+    {
+        returnOriginal: false,
+        upsert: true,
+    }
+    );
+
+  return routes.findOneAndUpdate({route: url},
     {
       $setOnInsert: {
         route: url,
-        key: nanoid(7),
+        key: selectedKey.word,
       },
     },
     {

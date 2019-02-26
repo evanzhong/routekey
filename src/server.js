@@ -15,7 +15,8 @@ app.use(parse.json());
 // Connecting to the DB
 MongoClient.connect(dbURL, { useNewUrlParser: true })
   .then(client => {
-    app.locals.db = client.db('routeskey');
+    app.locals.db = client.db('routekey');
+    console.log("DB connection succesful")
   })
   .catch(() => console.error('DB connection failed :('));
 
@@ -35,6 +36,9 @@ const writeRoute = (db, url) => {
   );
 };
 
+const doesRouteExist = (db, submittedKey) => db.collection('routes-and-keys')
+  .findOne({ key: submittedKey });
+
 // Root page
 app.get('/', (req, res) => {
     const home = path.join(__dirname, 'public', 'index.html');
@@ -44,6 +48,13 @@ app.get('/', (req, res) => {
 // for specific keys
 app.get('/:key', (req, res) => {
     const key = req.params.key;
+    const { db } = req.app.locals;
+    doesRouteExist(db, key)
+      .then(doc => {
+        if (doc === null) return res.send('no routekey in DB');
+        res.redirect(doc.route)
+      })
+      .catch(console.error);
 });
 
 app.post('/new-route', (req, res) => {
@@ -56,6 +67,16 @@ app.post('/new-route', (req, res) => {
     } catch (err) {
         return res.status(400).send({error: 'invalid URL'});
     }
+    const { db } = req.app.locals;
+    writeRoute(db, route.href)
+      .then(result => {
+        const doc = result.value;
+        res.json({
+          route: doc.route,
+          key: doc.key,
+        });
+      })
+      .catch(console.error);
 });
 
 // Local testing

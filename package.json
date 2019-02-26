@@ -1,0 +1,11 @@
+{
+  "name": "routekey",
+  "version": "1.0.0",
+  "description": "A url-shortener for AHS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Evan Zhong",
+  "license": "ISC"
+}

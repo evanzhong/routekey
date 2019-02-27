@@ -37,7 +37,13 @@ const writeRoute = (db, url) => {
       selectedKey = returnedData[0];
       console.log("\n\n\nThe selectedKey:")
       console.log(selectedKey);
-      potentialKeys.findOneAndUpdate({_id: selectedKey._id},
+      routes.insertOne(
+        {
+          route: url,
+          key: selectedKey.word
+        }
+      );
+      potentialKeys.updateOne({_id: selectedKey._id},
         {
           $set: {
             _id: selectedKey._id,
@@ -45,22 +51,8 @@ const writeRoute = (db, url) => {
             word: selectedKey.word,
             inUse: true
           },
-        },
-        {
-          returnOriginal: true,
         });
-      return routes.findOneAndUpdate({route: url},
-        {
-          $setOnInsert: {
-            route: url,
-            key: selectedKey.word,
-          },
-        },
-        {
-          returnOriginal: false,
-          upsert: true,
-        }
-      );
+      return null;
     });
   });
 };

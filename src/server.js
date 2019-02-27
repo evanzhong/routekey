@@ -30,30 +30,32 @@ const writeRoute = (db, url) => {
   const totalDocuments = potentialKeys.countDocuments({"inUse": false}).then((count) => {
       const randIndex = Math.round(Math.random() * count);
       console.log("count: " + count + " randIndex: " + randIndex);
-      selectedKey = potentialKeys.find().limit(-1).skip(randIndex);
-      console.log("\n\n\n" + selectedKey);
+      selectedKey = potentialKeys.find({}).skip(randIndex).limit(-1);
+      selectedKey.toArray().then((array) => {
+        console.log(array[0]);
+      });
   });
 //   Change the below to delete and insert the value into keys-in-use
-  potentialKeys.findOneAndUpdate({_id: selectedKey._id},
-    {
-        $setOnInsert: {
-            _id: selectedKey._id,
-            num: selectedKey.num,
-            word: selectedKey.word,
-            inUse: true
-        },
-    },
-    {
-        returnOriginal: false,
-        upsert: true,
-    }
-    );
+//   potentialKeys.findOneAndUpdate({_id: selectedKey._id},
+//     {
+//         $setOnInsert: {
+//             _id: selectedKey._id,
+//             num: selectedKey.num,
+//             word: selectedKey.word,
+//             inUse: true
+//         },
+//     },
+//     {
+//         returnOriginal: false,
+//         upsert: true,
+//     }
+//     );
 
   return routes.findOneAndUpdate({route: url},
     {
       $setOnInsert: {
         route: url,
-        key: selectedKey.word,
+        // key: selectedKey.word,
       },
     },
     {

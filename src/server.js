@@ -35,7 +35,8 @@ const writeRoute = (db, url) => {
     selectedKeyCursor.toArray(function(err,returnedData){
       if(err) callback(err);
       selectedKey = returnedData[0];
-      console.log("\n\n\nThe selectedKey: " + selectedKey);
+      console.log("\n\n\nThe selectedKey:")
+      console.log(selectedKey);
       potentialKeys.findOneAndUpdate({_id: selectedKey._id},
         {
           $set: {
@@ -48,20 +49,20 @@ const writeRoute = (db, url) => {
         {
           returnOriginal: true,
         });
+      return routes.findOneAndUpdate({route: url},
+        {
+          $setOnInsert: {
+            route: url,
+            key: selectedKey.word,
+          },
+        },
+        {
+          returnOriginal: false,
+          upsert: true,
+        }
+      );
     });
   });
-  return routes.findOneAndUpdate({route: url},
-    {
-      $setOnInsert: {
-        route: url,
-        key: selectedKey.word,
-      },
-    },
-    {
-      returnOriginal: false,
-      upsert: true,
-    }
-  );
 };
 
 const doesRouteExist = (db, submittedKey) => db.collection('routes-and-keys')

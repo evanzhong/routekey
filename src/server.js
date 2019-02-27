@@ -29,7 +29,7 @@ const writeRoute = (db, url) => {
   var selectedKey;
 
   const totalDocuments = potentialKeys.countDocuments({"inUse": false}).then((count) => {
-    const randIndex = Math.round(Math.random() * count);
+    const randIndex = Math.floor(Math.random() * count);
     console.log("count: " + count + " randIndex: " + randIndex);
     selectedKeyCursor = potentialKeys.find({"inUse": false}).skip(randIndex).limit(-1);
     selectedKeyCursor.toArray(function(err,returnedData){

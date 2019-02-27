@@ -26,14 +26,16 @@ const writeRoute = (db, url) => {
   const routes = db.collection('routes-and-keys');
   const potentialKeys = db.collection('list-of-keys');
   var selectedKeyCursor;
+  var selectedKey;
 
   const totalDocuments = potentialKeys.countDocuments({"inUse": false}).then((count) => {
     const randIndex = Math.round(Math.random() * count);
     console.log("count: " + count + " randIndex: " + randIndex);
-    selectedKeyCursor = potentialKeys.find({}).skip(randIndex).limit(-1);
-    selectedKeyCursor.toArray().then((array) => {
-      let selectedKey = array[0]
-      console.log(selectedKey);
+    selectedKeyCursor = potentialKeys.find({"inUse": false}).skip(randIndex).limit(-1);
+    selectedKeyCursor.toArray(function(err,returnedData){
+      if(err) callback(err);
+      selectedKey = returnedData[0];
+      console.log("\n\n\nThe selectedKey: " + selectedKey);
       potentialKeys.findOneAndUpdate({_id: selectedKey._id},
         {
           $set: {
@@ -48,7 +50,6 @@ const writeRoute = (db, url) => {
         });
     });
   });
-
   return routes.findOneAndUpdate({route: url},
     {
       $setOnInsert: {

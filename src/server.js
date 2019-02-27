@@ -26,11 +26,13 @@ const writeRoute = (db, url) => {
   const routes = db.collection('routes-and-keys');
   const potentialKeys = db.collection('list-of-free-keys');
   const usedKeys = db.collection('keys-in-use');
-//   const randIndex = Math.floor(Math.random() * potentialKeys.countDocuments());
-    const randIndex = potentialKeys.countDocuments({"inUse": false});
-    console.log(randIndex)
-  const selectedKey = potentialKeys.find().limit( -1 ).skip(randIndex);
-  console.log(selectedKey);
+  var selectedKey;
+  const totalDocuments = potentialKeys.countDocuments({"inUse": false}).then((count) => {
+      const randIndex = Math.round(Math.random() * count);
+      console.log("count: " + count + " randIndex: " + randIndex);
+      selectedKey = potentialKeys.find().limit(-1).skip(randIndex);
+      console.log("\n\n\n" + selectedKey);
+  });
 //   Change the below to delete and insert the value into keys-in-use
   potentialKeys.findOneAndUpdate({_id: selectedKey._id},
     {

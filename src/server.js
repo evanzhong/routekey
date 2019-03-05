@@ -28,11 +28,11 @@ const writeRoute = (db, url) => {
   var selectedKeyCursor;
   var selectedKey;
 
-  const totalDocuments = potentialKeys.countDocuments({"inUse": false}).then((count) => {
+  potentialKeys.countDocuments({"inUse": false}).then((count) => {
     const randIndex = Math.floor(Math.random() * count);
     console.log("count: " + count + " randIndex: " + randIndex);
     selectedKeyCursor = potentialKeys.find({"inUse": false}).skip(randIndex).limit(-1);
-    selectedKeyCursor.toArray(function(err,returnedData){
+    selectedKeyCursor.toArray((err,returnedData) => {
       if(err) callback(err);
       selectedKey = returnedData[0];
       console.log("The selectedKey:")
@@ -43,7 +43,8 @@ const writeRoute = (db, url) => {
           key: selectedKey.word
         }
       );
-      potentialKeys.updateOne({_id: selectedKey._id},
+      potentialKeys.updateOne(
+        {_id: selectedKey._id},
         {
           $set: {
             _id: selectedKey._id,
@@ -51,10 +52,14 @@ const writeRoute = (db, url) => {
             word: selectedKey.word,
             inUse: true
           },
-        });
-      return routes.findOne({key: selectedKey.word});
+        }
+      );
     });
   });
+  return new Promise(function(resolve, reject) {
+    resolve('Success!');
+  });
+  // return routes.findOne({key: selectedKey.word});
 };
 
 const doesRouteExist = (db, submittedKey) => db.collection('routes-and-keys')

@@ -20,8 +20,8 @@ form.addEventListener('submit', event => {
       }
       result.insertAdjacentHTML('afterbegin', `
         <div class="generated-wrapper">
-          <a target="_blank" class="generated-url" rel="noopener" href="/${data.short_id}">
-            ${location.origin}/${data.short_id}
+          <a target="_blank" class="generated-url" rel="noopener" href="/${data.key}">
+            ${location.origin}/${data.key}
           </a>
         </div>
       `)

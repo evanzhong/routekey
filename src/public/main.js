@@ -14,14 +14,13 @@ form.addEventListener('submit', event => {
       url: input.value,
     })
   })
-    .then(data => {
-      while (result.hasChildNodes()) {
-        result.removeChild(result.lastChild);
-      }
+    .then(response => response.json())
+    .then(body => {
+      console.log(JSON.stringify(body));
       result.insertAdjacentHTML('afterbegin', `
         <div class="generated-wrapper">
-          <a target="_blank" class="generated-url" rel="noopener" href="/${data}">
-            ${location.origin}/${data}
+          <a target="_blank" class="generated-url" rel="noopener" href="/${body.key}">
+            ${location.origin}/${body.key}
           </a>
         </div>
       `)

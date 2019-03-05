@@ -35,7 +35,7 @@ const writeRoute = (db, url) => {
     selectedKeyCursor.toArray(function(err,returnedData){
       if(err) callback(err);
       selectedKey = returnedData[0];
-      console.log("\n\n\nThe selectedKey:")
+      console.log("The selectedKey:")
       console.log(selectedKey);
       routes.insertOne(
         {
@@ -52,7 +52,7 @@ const writeRoute = (db, url) => {
             inUse: true
           },
         });
-      return null;
+      return routes.findOne({key: selectedKey.word});
     });
   });
 };
@@ -85,14 +85,15 @@ app.post('/new-route', (req, res) => {
     let route;
     try {
         route = urlModule.parse(req.body.url);
-        console.log("try catch generated: " + route);
+        // console.log("try catch generated: " + route);
     } catch (err) {
-        console.log("Error in try catch");
+        // console.log("Error in try catch");
         return res.status(400).send({error: 'invalid URL'});
     }
     const { db } = req.app.locals;
     writeRoute(db, route.href)
       .then(result => {
+        console.log(result);
         const doc = result.value;
         console.log(doc);
         res.json({

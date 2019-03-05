@@ -1,0 +1,21 @@
+body{
+
+}
+h1, main{
+  margin: auto;
+  text-align: center;
+}
+.form{
+  margin-top: 50px;
+}
+form{
+  margin: 10px;
+}
+input{
+  margin-bottom: 5px;
+}
+button{
+  display: block;
+  margin-top: 10px;
+  margin: auto;
+}

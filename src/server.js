@@ -25,22 +25,26 @@ MongoClient.connect(dbURL, { useNewUrlParser: true })
 const writeRoute = (db, url) => {
   const routes = db.collection('routes-and-keys');
   const potentialKeys = db.collection('list-of-keys');
-  var selectedKeyCursor;
   var selectedKey;
 
-  potentialKeys.countDocuments({"inUse": false}).then((count) => {
-    const randIndex = Math.floor(Math.random() * count);
-    console.log("count: " + count + " randIndex: " + randIndex);
-    selectedKeyCursor = potentialKeys.find({"inUse": false}).skip(randIndex).limit(-1);
-    selectedKeyCursor.toArray((err,returnedData) => {
-      if(err) callback(err);
-      selectedKey = returnedData[0];
+  potentialKeys.countDocuments({"inUse": false})
+    .then((count) => {
+      const randIndex = Math.floor(Math.random() * count);
+      console.log("count: " + count + " randIndex: " + randIndex);
+      return randIndex;
+    })
+    .then((randIndex) => {
+      return selectedKeyCursor = potentialKeys.find({"inUse": false}).skip(randIndex).limit(-1).toArray();
+    })
+    .then((data) => {
+      selectedKey = data[0];
       console.log("The selectedKey:")
       console.log(selectedKey);
       routes.insertOne(
         {
           route: url,
-          key: selectedKey.word
+          key: selectedKey.word,
+          "createdAt": new Date(),
         }
       );
       potentialKeys.updateOne(
@@ -52,15 +56,15 @@ const writeRoute = (db, url) => {
             word: selectedKey.word,
             inUse: true
           },
+          $currentDate: { lastModified: true }
         }
       );
     });
-  });
-  return new Promise(function(resolve, reject) {
-    resolve('Success!');
-  });
-  // return routes.findOne({key: selectedKey.word});
 };
+
+const findRouteGivenUrl = (db, url) => {
+  return db.collection('routes-and-keys').findOne({route: url});
+}
 
 const doesRouteExist = (db, submittedKey) => db.collection('routes-and-keys')
   .findOne({ key: submittedKey });
@@ -97,12 +101,26 @@ app.post('/new-route', (req, res) => {
     }
     const { db } = req.app.locals;
     writeRoute(db, route.href)
+      // .then(result => {
+      //   console.log("\nPassed result: ")
+      //   console.log(result);
+      //   console.log(result.key);
+      //   res.json({
+      //     // route: doc.route,
+      //     // key: doc.key,
+      //     key: result.key
+      //   });
+      // })
+      // .catch(console.error);
+    findRouteGivenUrl(db, route.href)
       .then(result => {
+        console.log("\nPassed result: ")
         console.log(result);
+        console.log(result.key);
         res.json({
           // route: doc.route,
           // key: doc.key,
-          key: result
+          key: result.key
         });
       })
       .catch(console.error);

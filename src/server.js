@@ -99,11 +99,10 @@ app.post('/new-route', (req, res) => {
     writeRoute(db, route.href)
       .then(result => {
         console.log(result);
-        const doc = result.value;
-        console.log(doc);
         res.json({
-          route: doc.route,
-          key: doc.key,
+          // route: doc.route,
+          // key: doc.key,
+          key: result
         });
       })
       .catch(console.error);

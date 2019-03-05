@@ -16,6 +16,9 @@ form.addEventListener('submit', event => {
   })
     .then(response => response.json())
     .then(body => {
+      while (result.hasChildNodes()) {
+        result.removeChild(result.lastChild);
+      }
       console.log(JSON.stringify(body));
       result.insertAdjacentHTML('afterbegin', `
         <div class="generated-wrapper">

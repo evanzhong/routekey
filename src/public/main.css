@@ -1,21 +1,72 @@
 body{
   text-align: center;
+  font-family: 'Oxygen';
 }
-h1, main{
+#welcome{
+  font-size: 24px;
+  color: darkgray;
+  padding-bottom: 20px;
+  border-bottom: 1px solid gainsboro;
+}
+main{
   margin: auto;
   text-align: center;
+  width: 45vw;
 }
-.form{
+.form-wrapper{
+  background-color: #EEEEEE; 
+  padding: 35px;
+  padding-left: 50px;
+  padding-right: 50px;
   margin-top: 50px;
+  border-radius: 0.25em;
+}
+#routekey{
+  font-size: 60px;
+  color: dimgray;
+  margin-bottom: 5px;
+}
+#explanation{
+  margin-top: 0px;
 }
 form{
-  margin: 10px;
+  margin: 20px;
 }
 input{
   margin-bottom: 5px;
+  width: 100%;
+  height: 30px;
+  border-radius: 0.25em;
+  border: 1px solid gray;
+  box-sizing: border-box;
 }
 button{
-  display: block;
+  cursor: pointer;
   margin-top: 10px;
   margin: auto;
+  width: 100%;
+  height: 45px;
+  border-radius: 0.25em;
+  border: 1px solid gray;
+  box-sizing: border-box;
+}
+
+#notif{
+  font-size: 30px;
+}
+#notif-link{
+  font-size: 20px;
+}
+/* Tachyons */
+.dim {
+  opacity: 1;
+  transition: opacity .15s ease-in;
+}
+.dim:hover,
+.dim:focus {
+  opacity: .5;
+  transition: opacity .15s ease-in;
+}
+.dim:active {
+  opacity: .8; transition: opacity .15s ease-out;
 }

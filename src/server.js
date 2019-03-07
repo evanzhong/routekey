@@ -7,12 +7,16 @@ const path = require('path');
 const parse = require('body-parser');
 const express = require('express');
 const urlModule = require('url');
+const Agenda = require('agenda')
 const _ = require('lodash');
 
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(parse.json());
+
+// Setting up agenda
+const agenda = new Agenda({db: {address: dbURL}});
 
 // Connecting to the DB
 MongoClient.connect(dbURL, { useNewUrlParser: true })
@@ -47,6 +51,7 @@ app.post('/new-route', (req, res) => {
     // for debugging
     console.log("Route submitted: " + req.body.url);
     
+    // Catch passed information
     let route;
     try {
         route = urlModule.parse(req.body.url);
@@ -56,7 +61,8 @@ app.post('/new-route', (req, res) => {
         return res.status(400).send({error: 'invalid URL'});
     }
     const { db } = req.app.locals;
-    // Being writing
+
+    // Being writing new routes to DB
     const routes = db.collection('routes-and-keys');
     const potentialKeys = db.collection('list-of-keys');
     var selectedKey;

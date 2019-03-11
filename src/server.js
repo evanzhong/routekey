@@ -7,16 +7,12 @@ const path = require('path');
 const parse = require('body-parser');
 const express = require('express');
 const urlModule = require('url');
-const Agenda = require('agenda')
 const _ = require('lodash');
 
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(parse.json());
-
-// Setting up agenda
-const agenda = new Agenda({db: {address: dbURL}});
 
 // Connecting to the DB
 MongoClient.connect(dbURL, { useNewUrlParser: true })

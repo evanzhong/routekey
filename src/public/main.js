@@ -22,7 +22,7 @@ form.addEventListener('submit', event => {
       console.log(JSON.stringify(body));
       result.insertAdjacentHTML('afterbegin', `
         <div class="generated-wrapper">
-          <p id="notif">Your generated RouteKey is <strong>${body.key}</strong></p>
+          <p id="notif">Your generated RouteKey is: <b>${body.key}</b></p>
           <div id="notif-link">
             <span>Go to: </span>
             <a target="_blank" class="generated-url" rel="noopener" href="/${body.key}">

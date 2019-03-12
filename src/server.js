@@ -50,7 +50,7 @@ var cronJob = cron.job("0 * * * * *", () => {
       );
     })
     .catch(console.error);;
-  console.info('cron job completed');
+  // console.info('cron job completed');
 }); 
 cronJob.start();
 
@@ -69,7 +69,7 @@ app.get('/:key', (req, res) => {
     const { db } = req.app.locals;
     doesRouteExist(db, key)
       .then(doc => {
-        if (doc === null) return res.send('no routekey in DB');
+        if (doc === null) return res.sendFile(path.join(__dirname, 'public', 'not-found.html'));
         res.redirect(doc.route)
       })
       .catch(console.error);

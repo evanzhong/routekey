@@ -7,6 +7,7 @@ const path = require('path');
 const parse = require('body-parser');
 const express = require('express');
 const urlModule = require('url');
+const cron = require('cron');
 const _ = require('lodash');
 
 const app = express();
@@ -21,6 +22,37 @@ MongoClient.connect(dbURL, { useNewUrlParser: true })
     console.log("DB connection succesful at " + dbURL)
   })
   .catch(() => console.error('DB connection failed :('));
+
+var cronJob = cron.job("0 * * * * *", () => {
+  MongoClient.connect(dbURL, { useNewUrlParser: true })
+    .then((client) => {
+      // Delete expired routekeys
+      client.db('routekey').collection('routes-and-keys').deleteMany({
+        expireAt: {
+          $lt: new Date()
+        },
+      });
+      // return old inUse words to false
+      client.db('routekey').collection('list-of-keys').updateMany(
+        {
+          expireAt: {
+            $lt: new Date()
+          }
+        },
+        {
+          $set: {
+            inUse: false,
+          },
+          $unset: {
+            expireAt: "",
+          },
+        }
+      );
+    })
+    .catch(console.error);;
+  console.info('cron job completed');
+}); 
+cronJob.start();
 
 const doesRouteExist = (db, submittedKey) => db.collection('routes-and-keys')
   .findOne({ key: submittedKey });
@@ -46,8 +78,9 @@ app.get('/:key', (req, res) => {
 app.post('/new-route', (req, res) => {
     // for debugging
     console.log("Route submitted: " + req.body.url);
-    
+    console.log("expireTime submitted: " + req.body.expireTime);
     // Catch passed information
+    let expireTime = req.body.expireTime;
     let route;
     try {
         route = urlModule.parse(req.body.url);
@@ -62,6 +95,7 @@ app.post('/new-route', (req, res) => {
     const routes = db.collection('routes-and-keys');
     const potentialKeys = db.collection('list-of-keys');
     var selectedKey;
+    var currentDate = new Date();
 
     potentialKeys.countDocuments({"inUse": false})
       .then((count) => {
@@ -80,7 +114,7 @@ app.post('/new-route', (req, res) => {
           {
             route: route.href,
             key: selectedKey.word,
-            "createdAt": new Date(),
+            "expireAt": new Date(currentDate.getTime() + expireTime*60000),
           }
         );
         potentialKeys.updateOne(
@@ -90,9 +124,9 @@ app.post('/new-route', (req, res) => {
               _id: selectedKey._id,
               num: selectedKey.num,
               word: selectedKey.word,
-              inUse: true
+              inUse: true,
+              "expireAt": new Date(currentDate.getTime() + expireTime*60000),
             },
-            $currentDate: { lastModified: true }
           }
         );
         return selectedKey.word

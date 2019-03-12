@@ -17,6 +17,12 @@
           <p id="explanation">Enter url to generate a routekey (automatically expires in 5 minutes)</p>
           <form>
             <input class="url" type="url" placeholder="Paste full url: (i.e. http://blog.interviewing.io/can-fake-names-create-bias/)" required name="url" autofocus>
+            <select class="expire" list="expireTimes" required name="expire">
+              <option value="5">5 Minutes</option>
+              <option value="15">15 Minutes</option>
+              <option value="30">30 Minutes</option>
+              <option value="60">1 Hour</option>
+            </select>
             <button type="submit" class="submit dim">Generate!</button>
           </form>
           <section class="generated"></section>

@@ -4,6 +4,7 @@ const result = document.querySelector('.generated');
 form.addEventListener('submit', event => {
   event.preventDefault();
   const input = document.querySelector('.url');
+  const expireSelected = document.querySelector('.expire');
   fetch('/new-route', {
     method: 'POST',
     headers: {
@@ -12,6 +13,7 @@ form.addEventListener('submit', event => {
     },
     body: JSON.stringify({
       url: input.value,
+      expireTime: expireSelected.options[expireSelected.selectedIndex].value,
     })
   })
     .then(response => response.json())

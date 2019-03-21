@@ -1,4 +1,4 @@
-# .env
+.env
 .DS_Store
 
 # So I kind of forgot to tell gitignore to ignore dependencies so the repo is really bloated

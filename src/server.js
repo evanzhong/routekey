@@ -8,6 +8,7 @@ const parse = require('body-parser');
 const express = require('express');
 const urlModule = require('url');
 const cron = require('cron');
+const http = require("http");
 const _ = require('lodash');
 
 const app = express();
@@ -50,6 +51,7 @@ var cronJob = cron.job("0 * * * * *", () => {
       );
     })
     .catch(console.error);;
+    http.get("http://routekey.herokuapp.com");
   // console.info('cron job completed');
 }); 
 cronJob.start();

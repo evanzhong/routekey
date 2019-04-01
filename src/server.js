@@ -50,11 +50,16 @@ var cronJob = cron.job("0 * * * * *", () => {
         }
       );
     })
-    .catch(console.error);;
-    http.get("http://routekey.herokuapp.com");
-  // console.info('cron job completed');
+    .catch(console.error);
+  console.info('cron job completed');
 }); 
+
+var cronJobHttp = cron.job("*/15 * * * * *", () => {
+  http.get("http://routekey.herokuapp.com");
+  console.log('pinged!')
+});
 cronJob.start();
+cronJobHttp.start();
 
 const doesRouteExist = (db, submittedKey) => db.collection('routes-and-keys')
   .findOne({ key: submittedKey });

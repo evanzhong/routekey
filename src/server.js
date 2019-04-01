@@ -54,7 +54,7 @@ var cronJob = cron.job("0 * * * * *", () => {
   console.info('cron job completed');
 }); 
 
-var cronJobHttp = cron.job("*/15 * * * * *", () => {
+var cronJobHttp = cron.job("* */15 * * * *", () => {
   http.get("http://routekey.herokuapp.com");
   console.log('pinged!')
 });

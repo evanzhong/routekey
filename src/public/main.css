@@ -13,7 +13,7 @@ body{
 main{
   margin: auto;
   text-align: center;
-  width: 48vw;
+  width: 55vw;
   max-width: 750px;
 }
 .form-wrapper{
@@ -88,6 +88,25 @@ button:focus{
 #notif-link{
   font-size: 20px;
 }
+#morrisism-congrats{
+  font-weight: 900;
+  font-size: 20px;
+  margin-top: 20px;
+  border-top: 1px solid gainsboro;
+  background-image: -webkit-linear-gradient(90deg, red, orange);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-webkit-animation: hue 1s infinite linear;
+}
+@-webkit-keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
+}
+
 a:visited{
   color: blue;
 }

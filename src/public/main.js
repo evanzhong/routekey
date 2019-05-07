@@ -34,6 +34,15 @@ form.addEventListener('submit', event => {
           </div>
         </div>
       `)
+      if (body.morris){
+        document.querySelector('#notif-link').insertAdjacentHTML('afterend', `
+          <div id="morrisism-congrats">
+            <img src="images/parrot.gif" style="height: 35px;width: 35px;">
+              Congrats! You've found a MORRISISM!
+            <img src="images/parrot.gif" style="height: 35px;width: 35px;">
+          </div>
+        `)
+      }
     })
     .catch(console.error)
 });

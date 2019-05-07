@@ -149,6 +149,9 @@ app.post('/new-route', (req, res) => {
             inUse: true,
             "expireAt": new Date(currentDate.getTime() + expireTime*60000),
           },
+          $inc: {
+            usage: 1
+          }
         }
       );
       return selectedKey

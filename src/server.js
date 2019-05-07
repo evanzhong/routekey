@@ -107,85 +107,44 @@ app.post('/new-route', (req, res) => {
     var selectedKey;
     var currentDate = new Date();
 
-    if (Math.floor(Math.random() * 10) > 8) {
-      potentialKeys.countDocuments({"inUse": false, "isMorrisism": true})
-      .then((count) => {
-        const randIndex = Math.floor(Math.random() * count);
-        console.log("count: " + count + " randIndex: " + randIndex);
-        return randIndex;
-      })
-      .then((randIndex) => {
-        return selectedKeyCursor = potentialKeys.find({"inUse": false}).skip(randIndex).limit(-1).toArray();
-      })
-      .then((data) => {
-        selectedKey = data[0];
-        console.log("The selectedKey:")
-        console.log(selectedKey);
-        routes.insertOne(
-          {
-            route: route.href,
-            key: selectedKey.word,
-            "expireAt": new Date(currentDate.getTime() + expireTime*60000),
-          }
-        );
-        potentialKeys.updateOne(
-          {_id: selectedKey._id},
-          {
-            $set: {
-              inUse: true,
-              "expireAt": new Date(currentDate.getTime() + expireTime*60000),
-            },
-          }
-        );
-        return selectedKey
-      })
-      .then((selectedKey) => {
-        res.json({
+    potentialKeys.countDocuments({"inUse": false})
+    .then((count) => {
+      const randIndex = Math.floor(Math.random() * count);
+      console.log("count: " + count + " randIndex: " + randIndex);
+      return randIndex;
+    })
+    .then((randIndex) => {
+      return selectedKeyCursor = potentialKeys.find({"inUse": false}).skip(randIndex).limit(-1).toArray();
+    })
+    .then((data) => {
+      selectedKey = data[0];
+      console.log("The selectedKey:")
+      console.log(selectedKey);
+      routes.insertOne(
+        {
+          route: route.href,
           key: selectedKey.word,
-          morris: selectedKey.isMorrisism
-        });
-      })
-      .catch(console.error);
-    } else {
-      potentialKeys.countDocuments({"inUse": false, "isMorrisism": false})
-      .then((count) => {
-        const randIndex = Math.floor(Math.random() * count);
-        console.log("count: " + count + " randIndex: " + randIndex);
-        return randIndex;
-      })
-      .then((randIndex) => {
-        return selectedKeyCursor = potentialKeys.find({"inUse": false}).skip(randIndex).limit(-1).toArray();
-      })
-      .then((data) => {
-        selectedKey = data[0];
-        console.log("The selectedKey:")
-        console.log(selectedKey);
-        routes.insertOne(
-          {
-            route: route.href,
-            key: selectedKey.word,
+          "expireAt": new Date(currentDate.getTime() + expireTime*60000),
+        }
+      );
+      potentialKeys.updateOne(
+        {_id: selectedKey._id},
+        {
+          $set: {
+            inUse: true,
             "expireAt": new Date(currentDate.getTime() + expireTime*60000),
-          }
-        );
-        potentialKeys.updateOne(
-          {_id: selectedKey._id},
-          {
-            $set: {
-              inUse: true,
-              "expireAt": new Date(currentDate.getTime() + expireTime*60000),
-            },
-          }
-        );
-        return selectedKey
-      })
-      .then((selectedKey) => {
-        res.json({
-          key: selectedKey.word,
-          morris: selectedKey.isMorrisism
-        });
-      })
-      .catch(console.error);
-    }
+          },
+        }
+      );
+      return selectedKey
+    })
+    .then((selectedKey) => {
+      res.json({
+        key: selectedKey.word,
+        morris: selectedKey.isMorrisism
+      });
+    })
+    .catch(console.error);
 });
 
 // Local testing

@@ -47,6 +47,9 @@ var cronJob = cron.job("0 * * * * *", () => {
           $unset: {
             expireAt: "",
           },
+        },
+        () => {
+          client.close()
         }
       );
     })
@@ -56,7 +59,7 @@ var cronJob = cron.job("0 * * * * *", () => {
 
 var cronJobHttp = cron.job("* */15 * * * *", () => {
   http.get("http://routekey.herokuapp.com");
-  console.log('pinged!')
+  // console.log('pinged!')
 });
 cronJob.start();
 cronJobHttp.start();

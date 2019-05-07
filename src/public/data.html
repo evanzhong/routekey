@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>Routekey</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel=" stylesheet" type="text/css" media="screen" href="main.css">
+      <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+      <style>
+        table{
+          margin: auto;
+          text-align: left;
+          width: 55vw;
+          max-width: 750px;
+          border-collapse: collapse;
+        }
+        table, th, td {
+          border: 1px solid black;
+          padding: 5px;
+        }
+        th{
+          font-weight: 900;
+        }
+        td {
+          margin: 10px;
+        }
+      </style>
+  </head>
+  <body>
+    <main>
+        <h3 id="welcome">RouteKey: A url shortener built for the school on Key Route</h3>
+        <h1>Welcome</h1>
+        <table id="sortable">
+          <tbody id="grid">
+            <tr>
+              <th>_id</th>
+              <th>num</th>
+              <th>word</th>
+              <th>inUse</th>
+              <th>isMorrisism</th>
+            </tr>
+          </tbody>
+        </table>
+    </main>
+    <script>
+      const table = document.querySelector('#grid');
+
+      document.addEventListener('DOMContentLoaded', yup => {
+        fetch('/load-data', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            // 'Content-Type': 'application/json'
+          },
+        })
+        .then(response => response.json())
+        .then(body => {
+          body.sort((a, b) => (a.num > b.num) ? 1 : -1)
+          body.forEach((each) => {
+            // console.log(each)
+            table.insertAdjacentHTML('beforeend', `
+            <tr>
+              <td class="key-ids">
+                ${each._id}
+              </td>
+              <td class="key-nums">
+                ${each.num}
+              </td>
+              <td class="key-words">
+                ${each.word}
+              </td>
+              <td class="key-inUses">
+                ${each.inUse}
+              </td>
+              <td class="key-isMorrisisms">
+                ${each.isMorrisism}
+              </td>
+            </tr>
+            `)
+          })
+          // console.log(JSON.stringify(body));
+        })
+        .catch(console.error)
+      });
+    </script>
+  </body>
+</html>

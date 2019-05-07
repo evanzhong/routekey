@@ -69,9 +69,24 @@ const doesRouteExist = (db, submittedKey) => db.collection('routes-and-keys')
 
 // Root page
 app.get('/', (req, res) => {
-    const home = path.join(__dirname, 'public', 'index.html');
-    res.sendFile(home);
+  const home = path.join(__dirname, 'public', 'index.html');
+  res.sendFile(home);
 });
+
+// Little Easter Egg
+app.get('/i-want-to-see-the-data', (req, res) => {
+  const egg = path.join(__dirname, 'public', 'data.html');
+  res.sendFile(egg);
+});
+app.post('/load-data', (req, res) => {
+  const { db } = req.app.locals;
+  db.collection('list-of-keys').find().toArray()
+  .then((data) => {
+    console.log(data)
+    res.json(data)
+  })
+})
+// End Easter Egg
 
 // for specific keys
 app.get('/:key', (req, res) => {

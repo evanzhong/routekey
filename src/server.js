@@ -78,11 +78,12 @@ passport.use(new GoogleStrategy(
   },
   (accessToken, refreshToken, profile, done) => {
     console.log(profile)
-    if (profile._json.hd == 'ausdk12.org' && email_verified) {
+    if (profile._json.hd == 'ausdk12.org' && profile._json.email_verified) {
       return done()
     }
     else {
       console.log("Not ausdk12")
+      return done(null, false)
     }
     // User.findOrCreate({googleId: profile.id}, (err, user) => {
     //   return done(err, user);

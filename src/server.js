@@ -86,7 +86,7 @@ passport.use(new GoogleStrategy(
 ));
 
 app.get('/auth/google/admin', 
-  passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/plus.login'], failureRedirect: '/'}),
+  passport.authenticate('google', {scope: 'email', failureRedirect: '/'}),
   (req, res) => {
     console.log("sending admin.html");
     res.sendFile(path.join(__dirname, 'public', 'admin.html'));

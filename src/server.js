@@ -77,6 +77,7 @@ passport.use(new GoogleStrategy(
     callbackURL: "http://www.routekey.me/auth/google/admin"
   },
   (accessToken, refreshToken, profile, done) => {
+    console.log(profile)
     User.findOrCreate({googleId: profile.id}, (err, user) => {
       return done(err, user);
     });
@@ -91,7 +92,6 @@ app.get('/auth/google/admin',
   (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'admin.html'));
   });
-
 // End oAuth
 
 const doesRouteExist = (db, submittedKey) => db.collection('routes-and-keys')

@@ -85,14 +85,15 @@ passport.use(new GoogleStrategy(
   }
 ));
 
-app.get('/auth/google',
-  passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/plus.login']}));
-
 app.get('/auth/google/admin', 
-  passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/plus.login'], failureRedirect: '/'}),
-  (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'admin.html'));
-  });
+  passport.authenticate('google', 
+  {
+    scope: ['https://www.googleapis.com/auth/plus.login'], 
+    successRedirect: (req, res) => {
+      res.sendFile(path.join(__dirname, 'public', 'admin.html'));
+    }, 
+    failureRedirect: '/'}),
+  );
 // End oAuth
 
 const doesRouteExist = (db, submittedKey) => db.collection('routes-and-keys')

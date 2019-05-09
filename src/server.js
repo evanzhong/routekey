@@ -10,6 +10,8 @@ const urlModule = require('url');
 const cron = require('cron');
 const http = require("http");
 const _ = require('lodash');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 const app = express();
 
@@ -23,7 +25,9 @@ MongoClient.connect(dbURL, { useNewUrlParser: true })
     console.log("DB connection succesful at " + dbURL)
   })
   .catch(() => console.error('DB connection failed :('));
+// End DB connection
 
+// cron jobs
 var cronJob = cron.job("0 * * * * *", () => {
   MongoClient.connect(dbURL, { useNewUrlParser: true })
     .then((client) => {
@@ -63,6 +67,32 @@ var cronJobHttp = cron.job("* */15 * * * *", () => {
 });
 cronJob.start();
 cronJobHttp.start();
+// End cron jobs
+
+// oAuth and passport stuff
+passport.use(new GoogleStrategy(
+  {
+    clientID: '1036822420605-i2imm7gigp2iqe657juk7k7q2o1hhilc.apps.googleusercontent.com',
+    clientSecret: 'aS_-xrwhL8C13BTE1n6MZJPO',
+    callbackURL: "http://www.routekey.me/auth/google/admin"
+  },
+  (accessToken, refreshToken, profile, done) => {
+    User.findOrCreate({googleId: profile.id}, (err, user) => {
+      return done(err, user);
+    });
+  }
+));
+
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+
+app.get('/auth/google/admin', 
+  passport.authenticate('google', { failureRedirect: '/' }),
+  (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'admin.html'));
+  });
+
+// End oAuth
 
 const doesRouteExist = (db, submittedKey) => db.collection('routes-and-keys')
   .findOne({ key: submittedKey });

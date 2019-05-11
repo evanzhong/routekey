@@ -79,7 +79,7 @@ passport.use(new GoogleStrategy(
   (accessToken, refreshToken, profile, done) => {
     console.log(profile)
     if (profile._json.hd == 'ausdk12.org' && profile._json.email_verified) {
-      return done(profile)
+      return done()
     }
     else {
       console.log("Not ausdk12")

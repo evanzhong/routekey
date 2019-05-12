@@ -83,7 +83,7 @@ passport.use(new GoogleStrategy(
     }
     else {
       console.log("Not ausdk12")
-      return done(Error)
+      return done(Error("Not and ausdk12 email"))
     }
     // User.findOrCreate({googleId: profile.id}, (err, user) => {
     //   return done(err, user);

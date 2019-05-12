@@ -72,14 +72,14 @@ cronJobHttp.start();
 // oAuth and passport stuff
 passport.use(new GoogleStrategy(
   {
-    clientID: '1036822420605-i2imm7gigp2iqe657juk7k7q2o1hhilc.apps.googleusercontent.com',
-    clientSecret: 'aS_-xrwhL8C13BTE1n6MZJPO',
+    clientID: process.env.clientID,
+    clientSecret: process.env.clientSecret,
     callbackURL: "http://www.routekey.me/auth/google/admin"
   },
   (accessToken, refreshToken, profile, done) => {
     console.log(profile)
     if (profile._json.hd == 'ausdk12.org' && profile._json.email_verified) {
-      return done()
+      return done(Error)
     }
     else {
       console.log("Not ausdk12")

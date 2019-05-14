@@ -165,6 +165,10 @@ app.post('/new-route', (req, res) => {
     .catch(console.error);
 });
 
+app.post('/sign-in-verify', (req, res) => {
+  console.log(req.body)
+});
+
 // Local testing
 app.set('port', process.env.PORT || 4100);
 const server = app.listen(app.get('port'), () => {

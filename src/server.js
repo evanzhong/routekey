@@ -74,7 +74,7 @@ passport.use(new GoogleStrategy(
   {
     clientID: process.env.clientID,
     clientSecret: process.env.clientSecret,
-    callbackURL: "http://www.routekey.me/auth/google/admin"
+    callbackURL: "auth/google/admin"
   },
   (accessToken, refreshToken, profile, done) => {
     console.log(profile)

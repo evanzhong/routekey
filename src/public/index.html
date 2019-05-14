@@ -13,6 +13,26 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id" content="1036822420605-i2imm7gigp2iqe657juk7k7q2o1hhilc.apps.googleusercontent.com">
     <!-- End Oauth stuff -->
+
+    <style>
+      /* Making the Google Sign In button centered */
+      .g-signin2{
+        width: 100%;
+      }
+      .g-signin2 > div{
+        margin: 0 auto;
+      }
+    </style>
+
+    <script>
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+    </script>
 </head>
 <body>
     <main>

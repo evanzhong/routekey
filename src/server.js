@@ -166,7 +166,7 @@ app.post('/new-route', (req, res) => {
 });
 
 app.post('/sign-in-verify', (req, res) => {
-  console.log(req.body)
+  console.log(req.body.id_token)
 });
 
 // Local testing

@@ -34,13 +34,16 @@
 
         // Sending to backend
         var id_token = googleUser.getAuthResponse().id_token;
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/sign-in-verify');
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onload = () => {
-          console.log('Signed in as: ' + xhr.responseText);
-        };
-        xhr.send('idtoken=' + id_token);
+        fetch('/sign-in-verify', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: JSON.stringify({
+            id_token: id_token,
+          })
+        })
       }
       function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();

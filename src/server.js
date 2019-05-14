@@ -167,6 +167,7 @@ app.post('/new-route', (req, res) => {
 
 app.post('/sign-in-verify', (req, res) => {
   console.log(req.body.id_token)
+  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
 // Local testing

@@ -44,11 +44,11 @@
           body: JSON.stringify({
             id_token: id_token,
             email: profile.getEmail(),
-            test: 'test value',
           })
         })
           .catch(console.error)
       }
+
       function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {

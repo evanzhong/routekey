@@ -91,6 +91,9 @@ passport.use(new GoogleStrategy(
   }
 ));
 
+app.use(passport.initialize());
+
+
 app.get('/auth/google/admin', 
   passport.authenticate('google', {scope: 'email', failureRedirect: '/'}),
   (req, res) => {

@@ -42,6 +42,8 @@
           },
           body: JSON.stringify({
             id_token: id_token,
+            email: profile.getEmail(),
+            test: 'test value',
           })
         })
       }

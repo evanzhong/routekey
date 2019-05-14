@@ -165,9 +165,9 @@ app.post('/new-route', (req, res) => {
     .catch(console.error);
 });
 
-app.post('/sign-in-verify', (req, res) => {
+app.got('/sign-in-verify', (req, res) => {
   console.log(req.body)
-  return res.sendFile(path.join(__dirname, 'public', 'admin.html'));
+  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
 // Local testing

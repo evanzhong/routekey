@@ -86,7 +86,7 @@ passport.use(new GoogleStrategy(
     let letterRegex = /^[A-Za-z]+$/;
 
     console.log(emailHead)
-    if (profile._json.hd == 'ausdk12.org' && profile._json.email_verified && emailHead.value.match(letterRegex)) {
+    if (profile._json.hd == 'ausdk12.org' && profile._json.email_verified && emailHead.match(letterRegex)) {
       return done(null, profile)
     }
     else { //TODO: throw an error message when returned to index

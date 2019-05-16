@@ -244,7 +244,7 @@ app.post('/admin-route', (req, res) => {
             key: phrase
           },
           {
-            $set: {
+            $set: { //Evan TODO: Should this be setOnInsert?
               route: route.href,
               key: phrase,
               "expireAt": new Date(currentDate.getTime() + expireTime*60000),

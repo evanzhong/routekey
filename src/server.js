@@ -240,11 +240,15 @@ app.post('/admin-route', (req, res) => {
       console.log(numFound);
       if (numFound == 0){
         routes.updateOne(
-          {key: phrase},
           {
-            route: route.href,
-            key: phrase,
-            "expireAt": new Date(currentDate.getTime() + expireTime*60000),
+            key: phrase
+          },
+          {
+            $set: {
+              route: route.href,
+              key: phrase,
+              "expireAt": new Date(currentDate.getTime() + expireTime*60000),
+            }
           },
           {
             upsert: true

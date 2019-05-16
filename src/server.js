@@ -216,7 +216,7 @@ app.post('/new-route', (req, res) => {
 
 app.post('/admin-route', (req, res) => {
   console.log(req.body);
-}
+});
 // Local testing
 app.set('port', process.env.PORT || 4100);
 const server = app.listen(app.get('port'), () => {

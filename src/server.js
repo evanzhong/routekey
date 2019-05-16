@@ -235,18 +235,28 @@ app.post('/admin-route', (req, res) => {
   const potentialKeys = db.collection('list-of-keys');
   var currentDate = new Date();
 
-  routes.find({word: phrase})
+  potentialKeys.find({word: phrase})
     .next((found) => {
       console.log(found);
       if (found == null){
-        console.log('entered if')
-        return potentialKeys.findOne({word: phrase})
+        routes.updateOne(
+          {key: phrase},
+          {
+            route: route,
+            key: phrase,
+            "expireAt": new Date(currentDate.getTime() + expireTime*60000),
+          },
+          {
+            upsert: true
+          }
+        );
+        return phrase;
       }
     })
-    .next((found) => {
-      console.log(found);
-      if (found == null){
-      }
+    .next((phrase) => {
+      res.json({
+        key: phrase,
+      });
     })
     .catch(console.error)
 });

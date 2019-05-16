@@ -12,6 +12,7 @@ const cron = require('cron');
 const http = require("http");
 const _ = require('lodash');
 const passport = require('passport');
+const flash = require('express-flash')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 const app = express();
@@ -21,7 +22,7 @@ app.use(parse.json());
 app.use(session({secret: "ofrC0D7RLA+WtqUQ5AxFuVBNSjI="}));
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(flash())
 // Connecting to the DB
 MongoClient.connect(dbURL, { useNewUrlParser: true })
   .then(client => {

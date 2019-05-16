@@ -101,7 +101,7 @@ app.get('/auth/google/admin',
 );
 
 app.get('/admin', 
-  passport.authenticate('google', {scope: 'email', failureRedirect: '/'}),
+  passport.authenticate('google', {scope: 'email', failureRedirect: '/?error=True'}),
   (req, res) => {
     console.log("sending admin.html");
     res.sendFile(path.join(__dirname, 'public', 'admin.html'));

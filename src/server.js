@@ -242,9 +242,9 @@ app.post('/admin-route', (req, res) => {
         return routes.countDocuments({word: phrase})
       }
     })
-    .then((numFound) => {
-      console.log(numFound)
-      if (numFound == 0){
+    .then((numFound2) => {
+      console.log(numFound2)
+      if (numFound2 == 0){
         routes.insertOne(
           {
             route: route.href,

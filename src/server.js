@@ -86,7 +86,7 @@ passport.use(new GoogleStrategy(
     let letterRegex = /^[A-Za-z]+$/;
 
     console.log(emailHead)
-    if (profile._json.hd == 'ausdk12.org' && profile._json.email_verified && (emailHead.match(letterRegex)) || emailHead == "evanz19") {
+    if (profile._json.hd == 'ausdk12.org' && profile._json.email_verified && (emailHead.match(letterRegex) || emailHead == "evanz19")) {
       return done(null, profile)
     }
     else { //TODO: throw an error message when returned to index
@@ -101,7 +101,7 @@ app.get('/auth/google/admin',
 );
 
 app.get('/admin', 
-  passport.authenticate('google', {scope: 'email', failureRedirect: '/?error=True'}),
+  passport.authenticate('google', {scope: 'email', failureRedirect: '/?notAuth=True', failureFlash: true,}),
   (req, res) => {
     console.log("sending admin.html");
     res.sendFile(path.join(__dirname, 'public', 'admin.html'));

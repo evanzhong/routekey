@@ -182,7 +182,22 @@
 						result.removeChild(result.lastChild);
 					}
 					console.log(JSON.stringify(body));
-					result.insertAdjacentHTML('afterbegin', `
+					if (body.key == "JXvCUuKI0dKVufgkVO2ilTRaUqM=") {
+						result.insertAdjacentHTML('afterbegin', `
+							<div class="generated-wrapper">
+								<p id="notif">Error: That phrase is already taken</p>
+								<div id="notif-link">Please select a different phrase and try again</div>
+							</div>
+						`);
+					} else if (body.key == "syzB7EKO7c0TfEfQpnZUXrqpABc="){
+						result.insertAdjacentHTML('afterbegin', `
+							<div class="generated-wrapper">
+								<p id="notif">Error: That phrase is already in use</p>
+								<div id="notif-link">Please select a different phrase and try again</div>
+							</div>
+						`);
+					} else {
+						result.insertAdjacentHTML('afterbegin', `
 						<div class="generated-wrapper">
 							<p id="notif">Your RouteKey was generated: <b>${body.key}</b></p>
 							<div id="notif-link">
@@ -193,7 +208,8 @@
 								<span> to users </span>
 							</div>
 						</div>
-					`)
+						`);
+					}
 				})
 				.catch(console.error)
 		});

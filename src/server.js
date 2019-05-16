@@ -239,11 +239,16 @@ app.post('/admin-route', (req, res) => {
     .then((numFound) => {
       console.log(numFound);
       if (numFound == 0){
-        return routes.countDocuments({key: phrase})
+        return routes.countDocuments({key: phrase});
+      } else {
+        return "JXvCUuKI0dKVufgkVO2ilTRaUqM=";
       }
     })
     .then((numFound2) => {
-      console.log(numFound2)
+      console.log(numFound2);
+      if (numFound2 === "JXvCUuKI0dKVufgkVO2ilTRaUqM="){
+        return numFound2;
+      }
       if (numFound2 == 0){
         routes.insertOne(
           {
@@ -253,6 +258,8 @@ app.post('/admin-route', (req, res) => {
           }
         );
         return phrase
+      } else {
+        return "syzB7EKO7c0TfEfQpnZUXrqpABc="
       }
     })
     .then((phrase) => {

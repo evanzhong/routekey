@@ -78,7 +78,7 @@ passport.use(new GoogleStrategy(
   {
     clientID: process.env.clientID,
     clientSecret: process.env.clientSecret,
-    callbackURL: "http://www.routekey.me/auth/google/admin"
+    callbackURL: "http://www.routekey.me/admin"
   },
   (accessToken, refreshToken, profile, done) => {
     console.log(profile)
@@ -93,12 +93,15 @@ passport.use(new GoogleStrategy(
 ));
 
 app.get('/auth/google/admin', 
+  passport.authenticate('google', {scope: 'email'}),
+);
+
+app.get('/admin', 
   passport.authenticate('google', {scope: 'email', failureRedirect: '/'}),
   (req, res) => {
     console.log("sending admin.html");
     res.sendFile(path.join(__dirname, 'public', 'admin.html'));
-  }, 
-);
+});
 
 // Don't really want to make more DB calls here, so just going to seralize and deserialize with the full profile
 passport.serializeUser((user, done) => {

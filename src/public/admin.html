@@ -87,6 +87,38 @@
 			button:focus{
 				outline: none;
 			}
+			a:visited{
+				color: blue;
+			}
+			/* Tachyons */
+			.dim {
+				opacity: 1;
+				transition: opacity .15s ease-in;
+			}
+			.dim:hover{
+				opacity: .5;
+				transition: opacity .15s ease-in;
+			}
+			.dim:active {
+				opacity: .8; transition: opacity .15s ease-out;
+			}
+			/* Fade in */
+			.fade-in {
+				opacity: 1;
+				animation-name: fadeInOpacity;
+				animation-iteration-count: 1;
+				animation-timing-function: ease-in;
+				animation-duration: 1s;
+			}
+
+			@keyframes fadeInOpacity {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
 		</style>
 	</head>
 	<body>
@@ -94,8 +126,8 @@
 			<h3 id="welcome">RouteKey: A url shortener built for the school on Key Route</h3>
 			<h1>Admin page</h1>
 			<section class="form-wrapper fade-in">
-				<h1 id="routekey">RouteKey Admin</h1>
-				<p id="explanation">Enter url and phrase to generate a routekey</p>
+				<h1 id="routekey">RouteKey Admin Generation</h1>
+				<p id="explanation">Generate a RouteKey with a phrase you select yourself</p>
 				<form>
 					<input class="url" type="url" placeholder="Paste full url: (i.e. http://blog.interviewing.io/can-fake-names-create-bias/)" required name="url" autofocus>
 					<input class="phrase" type="text" placeholder="Enter a phrase, using dashes instead of spaces (i.e. bmun-waiver-2019)" required name="phrase">
@@ -111,5 +143,48 @@
 			</section>
 			<a href="/">Go generate a new RouteKey!</a>
 		</main>
+		<script>
+		const form = document.querySelector('form');
+		const result = document.querySelector('.generated');
+
+		form.addEventListener('submit', event => {
+			event.preventDefault();
+			const input = document.querySelector('.url');
+			const phrase = document.querySelector('.phrase');
+			const expireSelected = document.querySelector('.expire');
+			fetch('/admin-route', {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					url: input.value,
+					phrase: phrase.value,
+					expireTime: expireSelected.options[expireSelected.selectedIndex].value,
+				})
+			})
+				.then(response => response.json())
+				.then(body => {
+					while (result.hasChildNodes()) {
+						result.removeChild(result.lastChild);
+					}
+					console.log(JSON.stringify(body));
+					result.insertAdjacentHTML('afterbegin', `
+						<div class="generated-wrapper">
+							<p id="notif">Your generated RouteKey is: <b>${body.key}</b></p>
+							<div id="notif-link">
+								<span>Go to: </span>
+								<a target="_blank" class="generated-url" rel="noopener" href="/${body.key}">
+									${location.origin}/${body.key}
+								</a>
+								<span> to use </span>
+							</div>
+						</div>
+					`)
+				})
+				.catch(console.error)
+		});
+		</script>
 	</body>
 </html>

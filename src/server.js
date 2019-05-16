@@ -222,7 +222,7 @@ app.post('/admin-route', (req, res) => {
   try {
       route = urlModule.parse(req.body.url);
       // console.log("try catch generated: " + route);
-      console.log("Route submitted: " + route);
+      console.log("Route submitted: " + route.href);
       console.log("phrase submitted: " + phrase);
       console.log("expireTime submitted: " + expireTime);
   } catch (err) {
@@ -235,10 +235,10 @@ app.post('/admin-route', (req, res) => {
   const potentialKeys = db.collection('list-of-keys');
   var currentDate = new Date();
 
-  potentialKeys.find({word: phrase})
-    .next((found) => {
-      console.log(found);
-      if (found == null){
+  potentialKeys.count({word: phrase})
+    .next((numFound) => {
+      console.log(numFound);
+      if (numFound == 0){
         routes.updateOne(
           {key: phrase},
           {

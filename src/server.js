@@ -18,7 +18,7 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(parse.json());
-app.use(session({ secret: "cats" }));
+app.use(session({secret: "ofrC0D7RLA+WtqUQ5AxFuVBNSjI="}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -89,9 +89,6 @@ passport.use(new GoogleStrategy(
       console.log("Not ausdk12")
       return done(null, false, {message: 'Not an ausdk12 email.'});
     }
-    // User.findOrCreate({googleId: profile.id}, (err, user) => {
-    //   return done(err, user);
-    // });
   }
 ));
 
@@ -101,7 +98,16 @@ app.get('/auth/google/admin',
     console.log("sending admin.html");
     res.sendFile(path.join(__dirname, 'public', 'admin.html'));
   }, 
-  );
+);
+
+// Don't really want to make more DB calls here, so just going to seralize and deserialize with the full profile
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
 // End oAuth
 
 const doesRouteExist = (db, submittedKey) => db.collection('routes-and-keys')

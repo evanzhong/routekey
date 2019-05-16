@@ -184,13 +184,13 @@
 					console.log(JSON.stringify(body));
 					result.insertAdjacentHTML('afterbegin', `
 						<div class="generated-wrapper">
-							<p id="notif">Your generated RouteKey is: <b>${body.key}</b></p>
+							<p id="notif">Your RouteKey was generated: <b>${body.key}</b></p>
 							<div id="notif-link">
-								<span>Go to: </span>
+								<span>Distribute: </span>
 								<a target="_blank" class="generated-url" rel="noopener" href="/${body.key}">
-									${location.origin}/${body.key}
+									routekey.me/${body.key}
 								</a>
-								<span> to use </span>
+								<span> to users </span>
 							</div>
 						</div>
 					`)

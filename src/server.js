@@ -6,6 +6,7 @@ const dbURL = process.env.DATABASE;
 const path = require('path');
 const parse = require('body-parser');
 const express = require('express');
+const session = require('express-session')
 const urlModule = require('url');
 const cron = require('cron');
 const http = require("http");
@@ -17,6 +18,9 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(parse.json());
+app.use(session({ secret: "cats" }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Connecting to the DB
 MongoClient.connect(dbURL, { useNewUrlParser: true })
@@ -90,9 +94,6 @@ passport.use(new GoogleStrategy(
     // });
   }
 ));
-
-app.use(passport.initialize());
-
 
 app.get('/auth/google/admin', 
   passport.authenticate('google', {scope: 'email', failureRedirect: '/'}),

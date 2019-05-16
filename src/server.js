@@ -238,7 +238,16 @@ app.post('/admin-route', (req, res) => {
   potentialKeys.find({word: phrase})
     .next((found) => {
       console.log(found);
+      if (found == null){
+        return routes.find({word: phrase})
+      }
     })
+    .next((found) => {
+      console.log(found);
+      if (found == null){
+      }
+    })
+    .catch(console.error
 });
 // Local testing
 app.set('port', process.env.PORT || 4100);

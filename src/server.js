@@ -86,12 +86,12 @@ passport.use(new GoogleStrategy(
     let letterRegex = /^[A-Za-z]+$/;
 
     console.log(emailHead)
-    if (profile._json.hd == 'ausdk12.org' && profile._json.email_verified && emailHead.match(letterRegex)) {
+    if (profile._json.hd == 'ausdk12.org' && profile._json.email_verified && (emailHead.match(letterRegex)) || emailHead == "evanz19") {
       return done(null, profile)
     }
     else { //TODO: throw an error message when returned to index
-      console.log("Not ausdk12")
-      return done(null, false, {message: 'Not an ausdk12 email.'});
+      console.log("Not ausdk12 staff")
+      return done(null, false, {message: 'Not an ausdk12 staff email.'});
     }
   }
 ));

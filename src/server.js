@@ -216,15 +216,15 @@ app.post('/new-route', (req, res) => {
 
 app.post('/admin-route', (req, res) => {
   // console.log(req.body);
-  console.log("Route submitted: " + req.body.url);
-  console.log("phrase submitted: " + req.body.phrase);
-  console.log("expireTime submitted: " + req.body.expireTime);
   let expireTime = req.body.expireTime;
   let phrase = req.body.phrase;
   let route;
   try {
       route = urlModule.parse(req.body.url);
       // console.log("try catch generated: " + route);
+      console.log("Route submitted: " + route);
+      console.log("phrase submitted: " + phrase);
+      console.log("expireTime submitted: " + expireTime);
   } catch (err) {
       // console.log("Error in try catch");
       return res.status(400).send({error: 'invalid URL'});
@@ -242,7 +242,7 @@ app.post('/admin-route', (req, res) => {
         routes.updateOne(
           {key: phrase},
           {
-            route: route,
+            route: route.href,
             key: phrase,
             "expireAt": new Date(currentDate.getTime() + expireTime*60000),
           },

@@ -236,7 +236,7 @@ app.post('/admin-route', (req, res) => {
   var currentDate = new Date();
 
   potentialKeys.countDocuments({word: phrase})
-    .next((numFound) => {
+    .then((numFound) => {
       console.log(numFound);
       if (numFound == 0){
         routes.updateOne(
@@ -253,7 +253,7 @@ app.post('/admin-route', (req, res) => {
         return phrase;
       }
     })
-    .next((phrase) => {
+    .then((phrase) => {
       res.json({
         key: phrase,
       });

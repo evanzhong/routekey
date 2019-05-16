@@ -106,9 +106,36 @@ button:focus{
     -webkit-filter: hue-rotate(-360deg);
   }
 }
-
 a:visited{
   color: blue;
+}
+
+#auth-link{
+  text-decoration: none;
+  color: white;
+}
+#signin-wrapper{
+  margin: auto;
+  height: 50px;
+  width: 250px;
+  background-color: #4285f4;
+  display: flex;
+}
+#abcRioButtonIcon{
+  background-color: white;
+  border: 1px solid #4285f4;
+  padding: 15px;
+  width: 18px;
+  height: 18px;
+  margin: 0px;
+}
+#signin-message{
+  margin: auto;
+  color: white;
+  font-size: 16px;
+  line-height: 48px;
+  font-weight: 500;
+  letter-spacing: .21px;
 }
 /* Tachyons */
 .dim {

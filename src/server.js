@@ -235,12 +235,12 @@ app.post('/admin-route', (req, res) => {
   const potentialKeys = db.collection('list-of-keys');
   var currentDate = new Date();
 
-  potentialKeys.find({word: phrase})
+  routes.find({word: phrase})
     .next((found) => {
       console.log(found);
       if (found == null){
         console.log('entered if')
-        return routes.find({word: phrase})
+        return potentialKeys.findOne({word: phrase})
       }
     })
     .next((found) => {

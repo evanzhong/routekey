@@ -239,22 +239,20 @@ app.post('/admin-route', (req, res) => {
     .then((numFound) => {
       console.log(numFound);
       if (numFound == 0){
-        routes.updateOne(
+        return routes.countDocuments({word: phrase})
+      }
+    })
+    .then((numFound) => {
+      console.log(numFound)
+      if (numFound == 0){
+        routes.insertOne(
           {
-            key: phrase
-          },
-          {
-            $set: { //Evan TODO: Should this be setOnInsert?
-              route: route.href,
-              key: phrase,
-              "expireAt": new Date(currentDate.getTime() + expireTime*60000),
-            }
-          },
-          {
-            upsert: true
+            route: route.href,
+            key: phrase,
+            "expireAt": new Date(currentDate.getTime() + expireTime*60000),
           }
         );
-        return phrase;
+        return phrase
       }
     })
     .then((phrase) => {

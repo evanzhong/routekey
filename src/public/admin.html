@@ -1,39 +1,115 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Routekey</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel=" stylesheet" type="text/css" media="screen" href="main.css"> -->
-    <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-    <style>
-        body{
-            text-align: center;
-            font-family: 'Oxygen', sans-serif;
-            /* background-color: #900C34;
-            background-color: #800020; */
-        }
-        #welcome{
-            font-size: 24px;
-            color: darkgray;
-            padding-bottom: 20px;
-            border-bottom: 1px solid gainsboro;
-        }
-        main{
-            margin: auto;
-            text-align: center;
-            width: 55vw;
-            max-width: 750px;
-        }
-    </style>
-</head>
-<body>
-    <main>
-        <h3 id="welcome">RouteKey: A url shortener built for the school on Key Route</h3>
-        <h1>Admin page</h1>
-        <a href="/">Go generate a new RouteKey!</a>
-      </main>
-</body>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Routekey</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- <link rel=" stylesheet" type="text/css" media="screen" href="main.css"> -->
+		<link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+		<style>
+			body{
+				text-align: center;
+				font-family: 'Oxygen', sans-serif;
+				/* background-color: #900C34;
+				background-color: #800020; */
+			}
+			#welcome{
+				font-size: 24px;
+				color: darkgray;
+				padding-bottom: 20px;
+				border-bottom: 1px solid gainsboro;
+			}
+			main{
+				margin: auto;
+				text-align: center;
+				width: 55vw;
+				max-width: 750px;
+			}
+			.form-wrapper{
+				background-color: #EEEEEE; 
+				padding: 35px;
+				padding-left: 50px;
+				padding-right: 50px;
+				margin-top: 50px;
+				border-radius: 0.25em;
+			}
+			#routekey{
+				font-size: 60px;
+				color: dimgray;
+				margin-bottom: 5px;
+				margin-top: 5px;
+			}
+			#explanation{
+				margin-top: 0px;
+				font-size: 15px;
+			}
+			form{
+				margin: 20px;
+			}
+			input, select{
+				font-family: 'Oxygen', sans-serif;
+				font-size: 15px;
+				padding: 5px;
+				margin-bottom: 10px;
+				width: 100%;
+				height: 35px;
+				border-radius: 0.35em;
+				border: 1px solid gainsboro;
+				box-sizing: border-box;
+
+			}
+			input:focus{
+				outline: none;
+				box-shadow: inset 0 0 10px #C3E3FF;
+				transition: 0.3s ease-in-out;
+			}
+			select:focus{
+				outline: none;
+				box-shadow: inset 0 0 10px #C3E3FF;
+				transition: 0.3s ease-in-out;
+			}
+			button{
+				cursor: pointer;
+				margin-top: 10px;
+				margin: auto;
+				width: 100%;
+				height: 50px;
+				border-radius: 0.25em;
+				border: 1px solid #800020;
+				box-sizing: border-box;
+				font-size: 25px;
+				font-family: 'ubuntu';
+				color: white;
+				background-color: #800020;
+			}
+			button:focus{
+				outline: none;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<h3 id="welcome">RouteKey: A url shortener built for the school on Key Route</h3>
+			<h1>Admin page</h1>
+			<section class="form-wrapper fade-in">
+				<h1 id="routekey">RouteKey Admin</h1>
+				<p id="explanation">Enter url and phrase to generate a routekey</p>
+				<form>
+					<input class="url" type="url" placeholder="Paste full url: (i.e. http://blog.interviewing.io/can-fake-names-create-bias/)" required name="url" autofocus>
+					<input class="phrase" type="text" placeholder="Enter a phrase, using dashes instead of spaces (i.e. bmun-waiver-2019)" required name="phrase">
+					<select class="expire" list="expireTimes" required name="expire">
+						<option value="10080">1 Week</option>
+						<option value="20160">2 Weeks</option>
+						<option value="40320">1 Month</option>
+						<option value="120960">3 Months</option>
+					</select>
+					<button type="submit" class="submit dim">Generate!</button>
+				</form>
+				<section class="generated"></section>
+			</section>
+			<a href="/">Go generate a new RouteKey!</a>
+		</main>
+	</body>
 </html>

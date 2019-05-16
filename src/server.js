@@ -235,7 +235,7 @@ app.post('/admin-route', (req, res) => {
   const potentialKeys = db.collection('list-of-keys');
   var currentDate = new Date();
 
-  potentialKeys.count({word: phrase})
+  potentialKeys.countDocuments({word: phrase})
     .next((numFound) => {
       console.log(numFound);
       if (numFound == 0){

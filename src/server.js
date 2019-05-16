@@ -239,7 +239,7 @@ app.post('/admin-route', (req, res) => {
     .then((numFound) => {
       console.log(numFound);
       if (numFound == 0){
-        return routes.countDocuments({word: phrase})
+        return routes.countDocuments({key: phrase})
       }
     })
     .then((numFound2) => {

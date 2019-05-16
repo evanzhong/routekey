@@ -101,11 +101,11 @@ app.get('/auth/google/admin',
 );
 
 // Don't really want to make more DB calls here, so just going to seralize and deserialize with the full profile
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done) => {
   done(null, user);
 });
 
-passport.deserializeUser(function(obj, done) {
+passport.deserializeUser((obj, done) => {
   done(null, obj);
 });
 // End oAuth

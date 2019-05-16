@@ -255,6 +255,7 @@ app.post('/admin-route', (req, res) => {
             route: route.href,
             key: phrase,
             "expireAt": new Date(currentDate.getTime() + expireTime*60000),
+            adminGenerated: true,
           }
         );
         return phrase

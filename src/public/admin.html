@@ -137,11 +137,13 @@
 		<main>
 			<h3 id="welcome">RouteKey: A url shortener built for the school on Key Route</h3>
 			<h1>Admin page</h1>
+			<!-- Future TODO: Charts and tables? Current inUse? Currently inUse AdminGen true? Submit your own? -->
 			<section class="form-wrapper fade-in">
 				<h1 id="routekey">RouteKey Admin Generation</h1>
 				<p id="explanation">Generate a RouteKey with a phrase you select yourself</p>
 				<form>
 					<input class="url" type="url" placeholder="Paste full url: (i.e. http://blog.interviewing.io/can-fake-names-create-bias/)" required name="url" autofocus>
+					<!-- Future TODO: check if phrase is url safe using: ^[a-zA-Z0-9_-]*$ -->
 					<input class="phrase" type="text" placeholder="Enter a phrase, using dashes instead of spaces (i.e. bmun-waiver-2019)" required name="phrase">
 					<select class="expire" list="expireTimes" required name="expire">
 						<option value="10080">1 Week</option>
@@ -153,7 +155,7 @@
 				</form>
 				<section class="generated"></section>
 			</section>
-			<a href="/">Go generate a new RouteKey!</a>
+			<a href="/">Return to home</a>
 		</main>
 		<script>
 		const form = document.querySelector('form');

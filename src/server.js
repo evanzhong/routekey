@@ -82,6 +82,8 @@ passport.use(new GoogleStrategy(
   },
   (accessToken, refreshToken, profile, done) => {
     console.log(profile)
+    let emailHead = profile._json.email.split("@");
+    console.log(emailHead)
     if (profile._json.hd == 'ausdk12.org' && profile._json.email_verified) {
       return done(null, profile)
     }

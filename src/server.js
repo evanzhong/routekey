@@ -215,7 +215,30 @@ app.post('/new-route', (req, res) => {
 });
 
 app.post('/admin-route', (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
+  console.log("Route submitted: " + req.body.url);
+  console.log("phrase submitted: " + req.body.phrase);
+  console.log("expireTime submitted: " + req.body.expireTime);
+  let expireTime = req.body.expireTime;
+  let phrase = req.body.phrase;
+  let route;
+  try {
+      route = urlModule.parse(req.body.url);
+      // console.log("try catch generated: " + route);
+  } catch (err) {
+      // console.log("Error in try catch");
+      return res.status(400).send({error: 'invalid URL'});
+  }
+
+  const { db } = req.app.locals;
+  const routes = db.collection('routes-and-keys');
+  const potentialKeys = db.collection('list-of-keys');
+  var currentDate = new Date();
+
+  potentialKeys.find({word: phrase})
+    .next((found) => {
+      console.log(found);
+    })
 });
 // Local testing
 app.set('port', process.env.PORT || 4100);

@@ -239,6 +239,7 @@ app.post('/admin-route', (req, res) => {
     .next((found) => {
       console.log(found);
       if (found == null){
+        console.log('entered if')
         return routes.find({word: phrase})
       }
     })

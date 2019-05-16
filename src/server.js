@@ -247,7 +247,7 @@ app.post('/admin-route', (req, res) => {
       if (found == null){
       }
     })
-    .catch(console.error
+    .catch(console.error)
 });
 // Local testing
 app.set('port', process.env.PORT || 4100);

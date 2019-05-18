@@ -102,7 +102,7 @@ app.get('/auth/google/admin',
 );
 
 app.get('/admin', 
-  passport.authenticate('google', {scope: 'email', failureRedirect: '/?notAuth=True', failureFlash: 'Not an ausdk12 staff email.',}),
+  passport.authenticate('google', {scope: 'email', failureRedirect: '/', failureFlash: 'Not an ausdk12 staff email.',}),
   (req, res) => {
     console.log("sending admin.html");
     res.sendFile(path.join(__dirname, 'public', 'admin.html'));

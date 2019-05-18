@@ -37,7 +37,7 @@
 				margin: auto;
 				padding: 20px !important;
 			}
-			td{
+			td.data{
 				padding: 8px, 0px !important;
 			}
 			.center-main{
@@ -228,15 +228,15 @@
 					// console.log(each)
 					table.insertAdjacentHTML('beforeend', `
 						<tr>
-							<td class="keys">
+							<td class="data keys">
 								<a href="${each.route}">
 									${each.key}
 								</a>
 							</td>
-							<td class="key-expire">
+							<td class="data key-expire">
 								${Date(each.expireAt).toString().match(/[A-Za-z]+[\s][0-9]{1,2}[\s][2][0-9]{3}/g)}
 							</td>
-							<td class="key-isAdminCreated">
+							<td class="data key-isAdminCreated">
 								${each.isAdminCreated}
 							</td>
 						</tr>

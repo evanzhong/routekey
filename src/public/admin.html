@@ -226,7 +226,9 @@
 					table.insertAdjacentHTML('beforeend', `
 						<tr>
 							<td class="keys">
-								${each.key}
+								<a href="${each.route}">
+									${each.key}
+								</a>
 							</td>
 							<td class="key-expire">
 								${each.expireAt}

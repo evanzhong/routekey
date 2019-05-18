@@ -22,6 +22,16 @@
 				border-bottom: 1px solid gainsboro;
 			}
 			main{
+				display:flex;
+				place-items:center;
+				flex-direction: row;
+			}
+			.sides{
+				width: 14vw;
+				margin: auto;
+				padding: 20px !important;
+			}
+			.center-main{
 				margin: auto;
 				text-align: center;
 				width: 55vw;
@@ -32,7 +42,7 @@
 				padding: 35px;
 				padding-left: 50px;
 				padding-right: 50px;
-				margin-top: 50px;
+				margin-top: 35px;
 				border-radius: 0.25em;
 			}
 			#routekey{
@@ -41,7 +51,7 @@
 				margin-bottom: 5px;
 				margin-top: 5px;
 			}
-			#explanation{
+			.explanation{
 				margin-top: 0px;
 				font-size: 15px;
 			}
@@ -134,13 +144,25 @@
 		</style>
 	</head>
 	<body>
-		<main>
+		<div class="center-main" style="min-width:850px;">
 			<h3 id="welcome">RouteKey: A url shortener built for the school on Key Route</h3>
 			<h1>Admin page</h1>
+		</div>
+
+		<main>
+			<section class="form-wrapper fade-in sides">
+				<div>Active Routekeys</div>
+				<table>
+					<tr><td>phrase</td><td>TRUE</td></tr>
+					<tr><td>phrase</td><td>TRUE</td></tr>
+					<tr><td>phrase</td><td>TRUE</td></tr>
+					<tr><td>phrase</td><td>TRUE</td></tr>
+				</table>
+			</section>
 			<!-- Future TODO: Charts and tables? Current inUse? Currently inUse AdminGen true? Submit your own? -->
-			<section class="form-wrapper fade-in">
+			<section class="form-wrapper fade-in center-main">
 				<h1 id="routekey">RouteKey Admin Generation</h1>
-				<p id="explanation">Generate a RouteKey with a phrase you select yourself</p>
+				<p class="explanation">Generate a RouteKey with a phrase you select yourself</p>
 				<form>
 					<input class="url" type="url" placeholder="Paste full url: (i.e. http://blog.interviewing.io/can-fake-names-create-bias/)" required name="url" autofocus>
 					<!-- Future TODO: check if phrase is url safe using: ^[a-zA-Z0-9_-]*$ -->
@@ -155,8 +177,21 @@
 				</form>
 				<section class="generated"></section>
 			</section>
-			<a href="/">Return to home</a>
+			<section class="form-wrapper fade-in sides">
+				<p class="explanation">Have a cool word or phrase? Add it to the list-of-keys collection</p>
+				<form style="margin:0px">
+					<input class="new-phrase" type="text" placeholder="Enter your word or phrase" required name="phrase">
+					<label for="isMorrisism">Is your word a Morrisism?</label>
+					<select name="isMorrisism" id="">
+						<option value="False">No</option>
+						<option value="True">Yes</option>
+					</select>
+					<button type="submit" class="dim">Send!</button>
+				</form>
+			</section>
 		</main>
+		<a href="/">Return to home</a>
+		
 		<script>
 		const form = document.querySelector('form');
 		const result = document.querySelector('.generated');

@@ -219,6 +219,7 @@ app.post('/new-route', (req, res) => {
     .catch(console.error);
 });
 
+// Admin stuff
 app.post('/admin-route', (req, res) => {
   // console.log(req.body);
   let expireTime = req.body.expireTime;
@@ -275,6 +276,17 @@ app.post('/admin-route', (req, res) => {
     })
     .catch(console.error)
 });
+
+app.post('/load-admin-data', (req, res) => {
+  const { db } = req.app.locals;
+  db.collection('routes-and-keys').find().toArray()
+  .then((data) => {
+    console.log(data)
+    res.json(data)
+  })
+});
+// End Admin stuff
+
 // Local testing
 app.set('port', process.env.PORT || 4100);
 const server = app.listen(app.get('port'), () => {

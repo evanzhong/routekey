@@ -8,6 +8,12 @@
 		<!-- <link rel=" stylesheet" type="text/css" media="screen" href="main.css"> -->
 		<link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+		<!-- CDN stuff -->
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+		<!-- End CDN stuff -->
 		<style>
 			body{
 				text-align: center;
@@ -152,11 +158,9 @@
 		<main>
 			<section class="form-wrapper fade-in sides">
 				<div>Active Routekeys</div>
-				<table>
-					<tr><td>phrase</td><td>TRUE</td></tr>
-					<tr><td>phrase</td><td>TRUE</td></tr>
-					<tr><td>phrase</td><td>TRUE</td></tr>
-					<tr><td>phrase</td><td>TRUE</td></tr>
+				<table id="sortable">
+					<tbody id="grid">
+					</tbody>
 				</table>
 			</section>
 			<!-- Future TODO: Charts and tables? Current inUse? Currently inUse AdminGen true? Submit your own? -->
@@ -195,7 +199,51 @@
 		<script>
 		const form = document.querySelector('form');
 		const result = document.querySelector('.generated');
+		const table = document.querySelector('#grid');
 
+		document.addEventListener('DOMContentLoaded', yup => {
+			fetch('/load-data', {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					// 'Content-Type': 'application/json'
+				},
+			})
+			.then(response => response.json())
+			.then(body => {
+				table.insertAdjacentHTML('beforebegin', `
+					<thead>
+						<tr>
+							<th>key</th>
+							<th>expire time</th>
+							<th>admin created</th>
+						</tr>
+					</thead>
+				`)
+				body.sort((a, b) => (a.num > b.num) ? 1 : -1)
+				body.forEach((each) => {
+					// console.log(each)
+					table.insertAdjacentHTML('beforeend', `
+						<tr>
+							<td class="keys">
+								${each.key}
+							</td>
+							<td class="key-expire">
+								${each.expireAt}
+							</td>
+							<td class="key-isAdminCreated">
+								${each.isAdminCreated}
+							</td>
+						</tr>
+					`)
+				})
+				// console.log(JSON.stringify(body));
+			})
+			.then(() => {
+				$('#sortable').DataTable()
+			})
+			.catch(console.error)
+		});
 		form.addEventListener('submit', event => {
 			event.preventDefault();
 			const input = document.querySelector('.url');

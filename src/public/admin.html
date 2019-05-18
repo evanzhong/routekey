@@ -231,7 +231,7 @@
 								</a>
 							</td>
 							<td class="key-expire">
-								${each.expireAt.toString()}
+								${Date(each.expireAt).toString().match(/[A-Za-z]+[\s][0-9]{1,2}[\s][2][0-9]{3}/g)}
 							</td>
 							<td class="key-isAdminCreated">
 								${each.isAdminCreated}

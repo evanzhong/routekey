@@ -44,6 +44,40 @@
 			td{
 				padding: 8px 0px !important;
 			}
+			.paginate_button{
+				border-radius: 4px !important;
+				color: black !important;
+			}
+			.paginate_button:hover{
+				background: none !important;
+				background-color: none !important;
+				border: 1px solid grey !important;
+				/* opacity: .5 !important;
+				transition: opacity .15s ease-in !important; */
+			}
+			#sortable_paginate a.paginate_button:hover:not(.disabled){
+				color: black !important;
+			}
+			.paginate_button:active{
+				opacity: .8; transition: opacity .15s ease-out !important;
+			}
+			.current{
+				background: none !important;
+				background-color: white !important;
+				border: 1px solid lightgray !important;
+			}
+			.disabled{
+				color: black !important;
+				opacity: 0.8 !important;
+			}
+			.disabled:hover, .disabled:hover{
+				color: black !important;
+				opacity: 0.8 !important;
+				background: none !important;
+				background-color: none !important;
+				border: 1px solid white !important;
+			}
+			/* End overriding */
 			select{
 				background: #FFFFFF !important;
 			}

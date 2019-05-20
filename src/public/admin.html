@@ -264,60 +264,7 @@
 		const table = document.querySelector('#grid');
 
 		document.addEventListener('DOMContentLoaded', yup => {
-			fetch('/load-admin-data', {
-				method: 'POST',
-				headers: {
-					'Accept': 'application/json',
-					// 'Content-Type': 'application/json'
-				},
-			})
-			.then(response => response.json())
-			.then(body => {
-				table.insertAdjacentHTML('beforebegin', `
-					<thead>
-						<tr>
-							<th>key</th>
-							<th>expire time</th>
-							<th>admin created</th>
-						</tr>
-					</thead>
-				`)
-				body.sort((a, b) => (a.num > b.num) ? 1 : -1)
-				body.forEach((each) => {
-					// console.log(each)
-					table.insertAdjacentHTML('beforeend', `
-						<tr>
-							<td class="data keys">
-								<a href="${each.route}">
-									${each.key}
-								</a>
-							</td>
-							<td class="data key-expire">
-								${//each.expireAt
-									new Date(each.expireAt.split('T')).toString().match(/[A-Za-z]+[\s][0-9]{1,2}[\s][2][0-9]{3}/g)
-								}
-							</td>
-							<td class="data key-isAdminCreated">
-								${each.adminGenerated}
-							</td>
-						</tr>
-					`)
-				})
-				// console.log(JSON.stringify(body));
-			})
-			.then(() => {
-				$('#sortable').DataTable();
-				document.querySelector('#sortable_filter label').removeChild(document.querySelector('#sortable_filter label').firstChild);
-				document.querySelector('#sortable_filter input').placeholder = "Search";
-				document.querySelector('#sortable_length label').removeChild(document.querySelector('#sortable_length label').firstChild);
-				document.querySelector('#sortable_length label').removeChild(document.querySelector('#sortable_length label').lastChild);
-				let sortableOptions = document.querySelectorAll('#sortable_length option');
-				sortableOptions.forEach((each) => {
-					each.append(" entries per page");
-				});
-				// document.querySelector('#sortable_length').remove()
-			})
-			.catch(console.error)
+			loadLeftSidebarData()
 		});
 		
 		newWordForm.addEventListener('submit', event => {
@@ -413,6 +360,63 @@
 				})
 				.catch(console.error)
 		});
+		
+		function loadLeftSidebarData() {
+			fetch('/load-admin-data', {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					// 'Content-Type': 'application/json'
+				},
+			})
+			.then(response => response.json())
+			.then(body => {
+				table.insertAdjacentHTML('beforebegin', `
+					<thead>
+						<tr>
+							<th>key</th>
+							<th>expire time</th>
+							<th>admin created</th>
+						</tr>
+					</thead>
+				`)
+				body.sort((a, b) => (a.num > b.num) ? 1 : -1)
+				body.forEach((each) => {
+					// console.log(each)
+					table.insertAdjacentHTML('beforeend', `
+						<tr>
+							<td class="data keys">
+								<a href="${each.route}">
+									${each.key}
+								</a>
+							</td>
+							<td class="data key-expire">
+								${//each.expireAt
+									new Date(each.expireAt.split('T')).toString().match(/[A-Za-z]+[\s][0-9]{1,2}[\s][2][0-9]{3}/g)
+								}
+							</td>
+							<td class="data key-isAdminCreated">
+								${each.adminGenerated}
+							</td>
+						</tr>
+					`)
+				})
+				// console.log(JSON.stringify(body));
+			})
+			.then(() => {
+				$('#sortable').DataTable();
+				document.querySelector('#sortable_filter label').removeChild(document.querySelector('#sortable_filter label').firstChild);
+				document.querySelector('#sortable_filter input').placeholder = "Search";
+				document.querySelector('#sortable_length label').removeChild(document.querySelector('#sortable_length label').firstChild);
+				document.querySelector('#sortable_length label').removeChild(document.querySelector('#sortable_length label').lastChild);
+				let sortableOptions = document.querySelectorAll('#sortable_length option');
+				sortableOptions.forEach((each) => {
+					each.append(" entries per page");
+				});
+				// document.querySelector('#sortable_length').remove()
+			})
+			.catch(console.error)
+		}
 		</script>
 	</body>
 </html>

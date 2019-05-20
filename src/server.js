@@ -290,14 +290,39 @@ app.post('/load-admin-data', (req, res) => {
 app.post('/new-word', (req, res) => {
   let newWord = req.body.newWord;
   let isMorrisism = (req.body.isMorrisism == 'True') ? true : false;
-  console.log(newWord + " " + isMorrisism)
+  // console.log(newWord + " " + isMorrisism)
 
   const { db } = req.app.locals;
   const potentialKeys = db.collection('list-of-keys');
 
-  potentialKeys.countDocuments()
+  potentialKeys.countDocuments({word: newWord})
+    .then(numFound => {
+      if (numFound == 0) {
+        return potentialKeys.countDocuments();
+      }else{
+        return '5PwK42LCDYj3a6eRDvtt4HLTL2cS3JgsPRSZUh59Bm4=';
+      }
+    })
     .then(num => {
-      console.log(num);
+      if (num == '5PwK42LCDYj3a6eRDvtt4HLTL2cS3JgsPRSZUh59Bm4=') {
+        return num;
+      }else{
+        potentialKeys.insertOne(
+          {
+            num: num+1,
+            word: newWord,
+            inUse: false,
+            isMorrisism: isMorrisism,
+            adminGenerated: true
+          }
+        );
+        return newWord;
+      }
+    })
+    .then(newWord =>{
+      res.json({
+        newWord: newWord,
+      });
     })
     .catch(console.error)
 });

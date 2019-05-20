@@ -41,6 +41,13 @@
 			p:nth-child(1){
 				font-size: 18px;
 			}
+			#sortable_filter{
+				margin: auto;
+				width: 100%;
+			}
+			#sortable_filter input{
+				margin-left: 0px;
+			}
 			td{
 				padding: 8px 0px !important;
 			}
@@ -290,6 +297,9 @@
 			})
 			.then(() => {
 				$('#sortable').DataTable()
+				document.querySelector('#sortable_filter label').removeChild(document.querySelector('#sortable_filter label').firstChild)
+				document.querySelector('#sortable_filter input').placeholder = "Search"
+				document.querySelector('#sortable_length').remove()
 			})
 			.catch(console.error)
 		});

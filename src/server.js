@@ -289,8 +289,17 @@ app.post('/load-admin-data', (req, res) => {
 
 app.post('/new-word', (req, res) => {
   let newWord = req.body.newWord;
-  let isMorrisism = req.body.isMorrisism;
+  let isMorrisism = (req.body.isMorrisism == 'True') ? true : false;
   console.log(newWord + " " + isMorrisism)
+
+  const { db } = req.app.locals;
+  const potentialKeys = db.collection('list-of-keys');
+
+  potentialKeys.countDocuments()
+    .then(num => {
+      console.log(num);
+    })
+    .catch(console.error)
 });
 // End Admin stuff
 

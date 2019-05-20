@@ -252,6 +252,7 @@
 					</select>
 					<button type="submit" class="dim">Send!</button>
 				</form>
+				<section id="new-word-generated"></section>
 			</section>
 		</main>
 		<a href="/">Return to home</a>
@@ -323,6 +324,7 @@
 			event.preventDefault();
 			const newWord = document.querySelector('.new-phrase');
 			const isMorrisism = document.querySelector('#isMorrisism');
+			const newWordResponse = document.querySelector('#new-word-generated');
 			fetch('/new-word', {
 				method: 'POST',
 				headers: {
@@ -334,8 +336,25 @@
 					isMorrisism: isMorrisism.options[isMorrisism.selectedIndex].value,
 				})
 			})
+				.then(response => response.json())
 				.then(body =>{
 					console.log(body.newWord)
+					while (newWordResponse.hasChildNodes()) {
+						newWordResponse.removeChild(newWordResponse.lastChild);
+					}
+					if (body.newWord == '5PwK42LCDYj3a6eRDvtt4HLTL2cS3JgsPRSZUh59Bm4=') {
+						newWordResponse.insertAdjacentHTML('afterbegin', `
+							<div class="generated-wrapper">
+								<p>Error: That word is already in list-of-keys</p>
+							</div>
+						`);
+					}else{
+						newWordResponse.insertAdjacentHTML('afterbegin', `
+							<div class="generated-wrapper">
+								<p>The word: ${body.newWord} has been added to list-of-keys</p>
+							</div>
+						`);
+					}
 				})
 				.catch(console.error)
 		});

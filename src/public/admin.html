@@ -324,6 +324,18 @@
 			const newWord = document.querySelector('.new-phrase');
 			const isMorrisism = document.querySelector('#isMorrisism');
 			console.log(newWord.value + isMorrisism.options[isMorrisism.selectedIndex].value);
+			fetch('/new-word', {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					newWord: newWord.value,
+					isMorrisism: isMorrisism.options[isMorrisism.selectedIndex].value,
+				})
+			})
+				.catch(console.error)
 		});
 
 		mainForm.addEventListener('submit', event => {

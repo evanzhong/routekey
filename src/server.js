@@ -286,6 +286,12 @@ app.post('/load-admin-data', (req, res) => {
     res.json(data)
   })
 });
+
+app.post('/new-word', (req, res) => {
+  let newWord = req.body.newWord;
+  let isMorrisism = req.body.isMorrisism;
+  console.log(newWord + " " + isMorrisism)
+});
 // End Admin stuff
 
 // Local testing

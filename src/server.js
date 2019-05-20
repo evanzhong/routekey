@@ -194,6 +194,7 @@ app.post('/new-route', (req, res) => {
           route: route.href,
           key: selectedKey.word,
           "expireAt": new Date(currentDate.getTime() + expireTime*60000),
+          adminGenerated: false,
         }
       );
       potentialKeys.updateOne(

@@ -298,7 +298,7 @@ app.post('/new-word', (req, res) => {
   potentialKeys.countDocuments({word: newWord})
     .then(numFound => {
       if (numFound == 0) {
-        return potentialKeys.countDocuments();
+        return potentialKeys.countDocuments(); //TODO think about making this MAX of num field
       }else{
         return '5PwK42LCDYj3a6eRDvtt4HLTL2cS3JgsPRSZUh59Bm4=';
       }

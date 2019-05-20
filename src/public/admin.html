@@ -41,6 +41,10 @@
 			p:nth-child(1){
 				font-size: 18px;
 			}
+			#sortable_length{
+				margin: auto;
+				width: 100%;
+			}
 			#sortable_filter{
 				margin: auto;
 				width: 100%;
@@ -307,7 +311,7 @@
 				document.querySelector('#sortable_length label').removeChild(document.querySelector('#sortable_length label').lastChild);
 				let sortableOptions = document.querySelectorAll('#sortable_length option');
 				sortableOptions.forEach((each) => {
-					each.append("entries per page");
+					each.append(" entries per page");
 				});
 				// document.querySelector('#sortable_length').remove()
 			})

@@ -323,7 +323,7 @@
 			event.preventDefault();
 			const newWord = document.querySelector('.new-phrase');
 			const isMorrisism = document.querySelector('#isMorrisism');
-			console.log(newWord + isMorrisism);
+			console.log(newWord.value + isMorrisism.options[isMorrisism.selectedIndex].value);
 		});
 
 		mainForm.addEventListener('submit', event => {

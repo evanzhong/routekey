@@ -269,6 +269,9 @@
 		});
 		
 		document.querySelector('#reload-left-sidebar').addEventListener('click', event => {
+			while (table.hasChildNodes()) {
+				table.removeChild(table.lastChild);
+			}
 			loadLeftSidebarData()
 		});
 

@@ -223,7 +223,7 @@
 					<tbody id="grid">
 					</tbody>
 				</table>
-				<button class="submit dim" id="reload-left-sidebar">Reload</button>
+				<button class="submit dim" id="reload-left-sidebar">Reload!</button>
 			</section>
 			<section class="form-wrapper fade-in center-main">
 				<h1 id="routekey">RouteKey Admin Generation</h1>
@@ -269,7 +269,7 @@
 		
 		document.querySelector('#reload-left-sidebar').addEventListener('click', event => {
 			document.querySelector('#sortable_wrapper').remove()
-			document.querySelector('#reload-left-sidebar').insertAdjacentHTML('afterend', `
+			document.querySelector('#reload-left-sidebar').insertAdjacentHTML('beforebegin', `
 				<table id="sortable">
 					<tbody id="grid">
 					</tbody>
@@ -375,7 +375,7 @@
 				.then(successfulGeneration => {
 					if (successfulGeneration) {
 						document.querySelector('#sortable_wrapper').remove()
-						document.querySelector('#reload-left-sidebar').insertAdjacentHTML('afterend', `
+						document.querySelector('#reload-left-sidebar').insertAdjacentHTML('beforebegin', `
 							<table id="sortable">
 								<tbody id="grid">
 								</tbody>

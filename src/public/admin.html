@@ -41,6 +41,9 @@
 			p:nth-child(1){
 				font-size: 18px;
 			}
+			#sortable_wrapper{
+				margin-bottom: 10px;
+			}
 			#sortable_length{
 				margin: auto;
 				width: 100%;
@@ -245,13 +248,14 @@
 			<section class="form-wrapper fade-in sides">
 				<p class="explanation">Have a cool word or phrase? Add it to the list-of-keys collection</p>
 				<form style="margin:0px" id="new-word-form">
-					<input class="new-phrase" type="text" placeholder="Enter your word or phrase" required name="phrase">
+					<label for="phrase">Your word will be used in RouteKey generation on the home page</label>
+					<input class="new-phrase" type="text" placeholder="Enter your word or phrase (i.e. iridescent)" required name="phrase">
 					<label for="isMorrisism">Is your word a Morrisism?</label>
 					<select name="isMorrisism" id="isMorrisism">
 						<option value="False">No</option>
 						<option value="True">Yes</option>
 					</select>
-					<button type="submit" class="dim">Send!</button>
+					<button type="submit" class="dim">Add!</button>
 				</form>
 				<section id="new-word-generated"></section>
 			</section>

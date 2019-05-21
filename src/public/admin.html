@@ -262,17 +262,27 @@
 		const mainForm = document.querySelector('#main-form');
 		const newWordForm = document.querySelector('#new-word-form');
 		const result = document.querySelector('.generated');
-		const table = document.querySelector('#grid');
 
 		document.addEventListener('DOMContentLoaded', yup => {
 			loadLeftSidebarData()
 		});
 		
 		document.querySelector('#reload-left-sidebar').addEventListener('click', event => {
-			document.querySelector('#sortable thead').remove()
-			while (table.hasChildNodes()) {
-				table.removeChild(table.lastChild);
-			}
+			// document.querySelector('#sortable thead').remove()
+			// document.querySelector('#sortable_length').remove()
+			// document.querySelector('#sortable_filter').remove()
+			// document.querySelector('#sortable_info').remove()
+			// document.querySelector('#sortable_paginate').remove()
+			// while (table.hasChildNodes()) {
+			// 	table.removeChild(table.lastChild);
+			// }
+			document.querySelector('#sortable_wrapper').remove()
+			document.querySelector('#reload-left-sidebar').insertAdjacentHTML('afterend', `
+				<table id="sortable">
+					<tbody id="grid">
+					</tbody>
+				</table>
+			`)
 			loadLeftSidebarData()
 		});
 
@@ -371,6 +381,7 @@
 		});
 		
 		function loadLeftSidebarData() {
+			const table = document.querySelector('#grid');
 			fetch('/load-admin-data', {
 				method: 'POST',
 				headers: {

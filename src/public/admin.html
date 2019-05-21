@@ -219,6 +219,7 @@
 			<section class="form-wrapper fade-in sides">
 				<p class="explanation">Active RouteKeys</p>
 				<!-- TODO Format this correctly (bottons on bottom) -->
+				<div id="reload-left-sidebar">Reload</div>
 				<table id="sortable">
 					<tbody id="grid">
 					</tbody>
@@ -267,6 +268,10 @@
 			loadLeftSidebarData()
 		});
 		
+		document.querySelector('#reload-left-sidebar').addEventListener('click' event => {
+			loadLeftSidebarData()
+		});
+
 		newWordForm.addEventListener('submit', event => {
 			event.preventDefault();
 			const newWord = document.querySelector('.new-phrase');

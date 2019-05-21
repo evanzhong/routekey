@@ -462,7 +462,10 @@
 				// console.log(JSON.stringify(body));
 			})
 			.then(() => {
-				$('#sortable').DataTable();
+				$('#sortable').DataTable({
+					paging: false,
+					scrollY: 400
+				});
 				document.querySelector('#sortable_filter label').removeChild(document.querySelector('#sortable_filter label').firstChild);
 				document.querySelector('#sortable_filter input').placeholder = "Search";
 				document.querySelector('#sortable_length label').removeChild(document.querySelector('#sortable_length label').firstChild);

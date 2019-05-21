@@ -35,8 +35,10 @@
 			}
 			main{
 				display: grid;
-				grid-template-columns: [left-edge] 10vw [col1] 10vw [col2] auto [col3] 10vw [col4] 10vw [right-edge];
+				grid-template-columns: [left-end] 10px [left-edge] 10vw [col1] 10vw [col2] auto [col3] 10vw [col4] 10vw [right-edge] 10px [right-end];
 				grid-template-rows: [top-edge] 15vh [row1] auto [row2] 10vh [bottom-edge];
+				/* margin-left: 10px;
+				margin-right: 10px; */
 			}
 			.sides{
 				margin-bottom: auto;
@@ -120,6 +122,7 @@
 			section.center-main{
 				margin-left: auto;
 				margin-right: auto;
+				margin-bottom: auto;
 				text-align: center;
 				width: 50vw;
 				max-width: 750px;

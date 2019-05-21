@@ -347,6 +347,7 @@
 								<div id="notif-link">Please select a different phrase and try again</div>
 							</div>
 						`);
+						return false
 					} else if (body.key == "syzB7EKO7c0TfEfQpnZUXrqpABc="){
 						result.insertAdjacentHTML('afterbegin', `
 							<div class="generated-wrapper">
@@ -354,6 +355,7 @@
 								<div id="notif-link">Please select a different phrase and try again</div>
 							</div>
 						`);
+						return false
 					} else {
 						result.insertAdjacentHTML('afterbegin', `
 						<div class="generated-wrapper">
@@ -367,17 +369,20 @@
 							</div>
 						</div>
 						`);
+						return true
 					}
 				})
-				.then(() => {
-					document.querySelector('#sortable_wrapper').remove()
-					document.querySelector('#reload-left-sidebar').insertAdjacentHTML('afterend', `
-						<table id="sortable">
-							<tbody id="grid">
-							</tbody>
-						</table>
-					`)
-					loadLeftSidebarData()
+				.then(successfulGeneration => {
+					if (successfulGeneration) {
+						document.querySelector('#sortable_wrapper').remove()
+						document.querySelector('#reload-left-sidebar').insertAdjacentHTML('afterend', `
+							<table id="sortable">
+								<tbody id="grid">
+								</tbody>
+							</table>
+						`)
+						loadLeftSidebarData()	
+					}
 				})
 				.catch(console.error)
 		});

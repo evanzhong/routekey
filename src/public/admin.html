@@ -268,14 +268,6 @@
 		});
 		
 		document.querySelector('#reload-left-sidebar').addEventListener('click', event => {
-			// document.querySelector('#sortable thead').remove()
-			// document.querySelector('#sortable_length').remove()
-			// document.querySelector('#sortable_filter').remove()
-			// document.querySelector('#sortable_info').remove()
-			// document.querySelector('#sortable_paginate').remove()
-			// while (table.hasChildNodes()) {
-			// 	table.removeChild(table.lastChild);
-			// }
 			document.querySelector('#sortable_wrapper').remove()
 			document.querySelector('#reload-left-sidebar').insertAdjacentHTML('afterend', `
 				<table id="sortable">
@@ -376,6 +368,16 @@
 						</div>
 						`);
 					}
+				})
+				.then(() => {
+					document.querySelector('#sortable_wrapper').remove()
+					document.querySelector('#reload-left-sidebar').insertAdjacentHTML('afterend', `
+						<table id="sortable">
+							<tbody id="grid">
+							</tbody>
+						</table>
+					`)
+					loadLeftSidebarData()
 				})
 				.catch(console.error)
 		});

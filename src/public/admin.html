@@ -269,9 +269,11 @@
 		});
 		
 		document.querySelector('#reload-left-sidebar').addEventListener('click', event => {
-			while (table.hasChildNodes()) {
-				table.removeChild(table.lastChild);
-			}
+			// document.querySelector('#sortable thead').remove()
+			// while (table.hasChildNodes()) {
+			// 	table.removeChild(table.lastChild);
+			// }
+			document.querySelector('#sortable_wrapper').remove()
 			loadLeftSidebarData()
 		});
 

@@ -323,6 +323,8 @@
 
 		document.addEventListener('DOMContentLoaded', yup => {
 			loadLeftSidebarData()
+			loadSuperAdminLeft()
+			loadSuperAdminRight()
 		});
 		
 		document.querySelector('#reload-left-sidebar').addEventListener('click', event => {
@@ -562,7 +564,7 @@
 			.then(() => {
 				$('#sortable').DataTable({
 					// scrollY: 200,
-					// scroller: true, //Evan TODO: maybe the left sidebar doesn't need to be scrollable but the rest of them could benefit from it?
+					// scroller: true, 
 				});
 				document.querySelector('#sortable_filter label').removeChild(document.querySelector('#sortable_filter label').firstChild);
 				document.querySelector('#sortable_filter input').placeholder = "Search";

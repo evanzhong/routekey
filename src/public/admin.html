@@ -243,7 +243,6 @@
 	</head>
 	<body>
 		<main>
-			<!-- TODO make the width alignment more nature with the main -->
 			<div class="center-main" style="min-width:820px;">
 				<h3 id="welcome">RouteKey: A url shortener built for the school on Key Route</h3>
 				<h1>Admin page</h1>
@@ -465,8 +464,8 @@
 			})
 			.then(() => {
 				$('#sortable').DataTable({
-					scrollY: 200,
-					scroller: true,
+					// scrollY: 200,
+					// scroller: true, //Evan TODO: maybe the left sidebar doesn't need to be scrollable but the rest of them could benefit from it?
 				});
 				document.querySelector('#sortable_filter label').removeChild(document.querySelector('#sortable_filter label').firstChild);
 				document.querySelector('#sortable_filter input').placeholder = "Search";

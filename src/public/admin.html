@@ -13,6 +13,8 @@
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/scroller/2.0.0/css/scroller.dataTables.min.css">
+		<script src="https://cdn.datatables.net/scroller/2.0.0/js/dataTables.scroller.min.js"></script>
 		<!-- End CDN stuff -->
 		<style>
 			body{
@@ -463,8 +465,8 @@
 			})
 			.then(() => {
 				$('#sortable').DataTable({
-					paging: false,
-					scrollY: 150
+					scrollY: 350,
+					scroller: true,
 				});
 				document.querySelector('#sortable_filter label').removeChild(document.querySelector('#sortable_filter label').firstChild);
 				document.querySelector('#sortable_filter input').placeholder = "Search";

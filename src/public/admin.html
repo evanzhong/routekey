@@ -535,7 +535,7 @@
 					// console.log(each)
 					table.insertAdjacentHTML('beforeend', `
 						<tr>
-							<td class="super-admin-left-route">
+							<td class="super-admin-left-_id">
 								${each._id}
 							</td>
 							
@@ -545,15 +545,15 @@
 								</a>
 							</td>
 							
-							<td>
+							<td class="super-admin-left-key">
 								${each.key}
 							</td>
 
-							<td>
+							<td class="super-admin-left-expireAt">
 								${each.expireAt}
 							</td>
 
-							<td>
+							<td class="super-admin-left-adminGenerated">
 								${each.adminGenerated}
 							</td>
 						</tr>

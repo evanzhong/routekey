@@ -580,6 +580,7 @@
 		}
 
 		function loadSuperAdminRight() {
+			const table = document.querySelector('#super-admin-list-of-key tbody');
 			fetch('/load-data', {
 					method: 'POST',
 					headers: {
@@ -630,7 +631,7 @@
 								<td>
 									${each.adminGenerated}
 								</td>
-								
+
 								<td>
 									${each.usage}
 								</td>

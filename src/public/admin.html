@@ -580,7 +580,78 @@
 		}
 
 		function loadSuperAdminRight() {
+			fetch('/load-data', {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json',
+						// 'Content-Type': 'application/json'
+					},
+				})
+				.then(response => response.json())
+				.then(body => {
+					table.insertAdjacentHTML('beforebegin', `
+						<thead>
+							<tr>
+								<th>_id</th>
+								<th>num</th>
+								<th>word</th>
+								<th>inUse</th>
+								<th>isMorrisism</th>
+								<th>adminGenerated</th>
+								<th>usage</th>
+							</tr>
+						</thead>
+					`)
+					body.sort((a, b) => (a.num > b.num) ? 1 : -1)
+					body.forEach((each) => {
+						// console.log(each)
+						table.insertAdjacentHTML('beforeend', `
+							<tr>
+								<td>
+									${each._id}
+								</td>
 
+								<td>
+									${each.num}
+								</td>
+
+								<td>
+									${each.word}
+								</td>
+
+								<td>
+									${each.inUse}
+								</td>
+
+								<td>
+									${each.isMorrisism}
+								</td>
+
+								<td>
+									${each.adminGenerated}
+								</td>
+								
+								<td>
+									${each.usage}
+								</td>
+							</tr>
+						`)
+					})
+					// console.log(JSON.stringify(body));
+				})
+				.then(() => {
+					$('#super-admin-list-of-keys').DataTable()
+					document.querySelector('#super-admin-list-of-keys_filter label').removeChild(document.querySelector('#super-admin-list-of-keys_filter label').firstChild);
+					document.querySelector('#super-admin-list-of-keys_filter input').placeholder = "Search";
+					document.querySelector('#super-admin-list-of-keys_length label').removeChild(document.querySelector('#super-admin-list-of-keys_length label').firstChild);
+					document.querySelector('#super-admin-list-of-keys_length label').removeChild(document.querySelector('#super-admin-list-of-keys_length label').lastChild);
+					let sortableOptions = document.querySelectorAll('#super-admin-list-of-keys_length option');
+					sortableOptions.forEach((each) => {
+						each.append(" entries per page");
+					});
+					// document.querySelector('#super-admin-list-of-keys_length').remove()
+				})
+				.catch(console.error)
 		}
 		</script>
 	</body>

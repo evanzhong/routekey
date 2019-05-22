@@ -492,8 +492,8 @@
 			})
 			.then(() => {
 				$('#sortable').DataTable({
-					// scrollY: 200,
-					// scroller: true, //Evan TODO: maybe the left sidebar doesn't need to be scrollable but the rest of them could benefit from it?
+					scrollY: 200,
+					scroller: true, //Evan TODO: maybe the left sidebar doesn't need to be scrollable but the rest of them could benefit from it?
 				});
 				document.querySelector('#sortable_filter label').removeChild(document.querySelector('#sortable_filter label').firstChild);
 				document.querySelector('#sortable_filter input').placeholder = "Search";

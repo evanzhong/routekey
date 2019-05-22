@@ -566,15 +566,15 @@
 					// scrollY: 200,
 					// scroller: true, 
 				});
-				document.querySelector('#sortable_filter label').removeChild(document.querySelector('#sortable_filter label').firstChild);
-				document.querySelector('#sortable_filter input').placeholder = "Search";
-				document.querySelector('#sortable_length label').removeChild(document.querySelector('#sortable_length label').firstChild);
-				document.querySelector('#sortable_length label').removeChild(document.querySelector('#sortable_length label').lastChild);
-				let sortableOptions = document.querySelectorAll('#sortable_length option');
+				document.querySelector('#super-admin-routes-and-keys_filter label').removeChild(document.querySelector('#super-admin-routes-and-keys_filter label').firstChild);
+				document.querySelector('#super-admin-routes-and-keys_filter input').placeholder = "Search";
+				document.querySelector('#super-admin-routes-and-keys_length label').removeChild(document.querySelector('#super-admin-routes-and-keys_length label').firstChild);
+				document.querySelector('#super-admin-routes-and-keys_length label').removeChild(document.querySelector('#super-admin-routes-and-keys_length label').lastChild);
+				let sortableOptions = document.querySelectorAll('#super-admin-routes-and-keys_length option');
 				sortableOptions.forEach((each) => {
 					each.append(" entries per page");
 				});
-				// document.querySelector('#sortable_length').remove()
+				// document.querySelector('#super-admin-routes-and-keys_length').remove()
 			})
 			.catch(console.error)
 		}

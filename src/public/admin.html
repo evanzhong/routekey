@@ -565,12 +565,8 @@
 				$('#super-admin-routes-and-keys').DataTable({
 					// scrollY: 200,
 					// scroller: true, 
-					"columns": [
-						{"width": "20%"},
-						{"width": "50px"},
-						null,
-						null,
-						null
+					columnDefs: [
+						{ targets: '_all', width: '15px' }
 					]
 				});
 				document.querySelector('#super-admin-routes-and-keys_filter label').removeChild(document.querySelector('#super-admin-routes-and-keys_filter label').firstChild);

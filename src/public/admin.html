@@ -565,10 +565,19 @@
 				$('#super-admin-routes-and-keys').DataTable({
 					// scrollY: 200,
 					// scroller: true, 
-					columnDefs: [
-						{ targets: [1], width: '50px', }
-					]
+					"autoWidth" : true,
+					"columns": [
+						{width: '50px'},
+						{width: '50px'},
+						{width: '30px'},
+						{width: '100px'},
+						{width: '100px'},
+					],
+					"paging": true,
+					"scrollY": 400,
+					"scrollX": true,
 				});
+
 				document.querySelector('#super-admin-routes-and-keys_filter label').removeChild(document.querySelector('#super-admin-routes-and-keys_filter label').firstChild);
 				document.querySelector('#super-admin-routes-and-keys_filter input').placeholder = "Search";
 				document.querySelector('#super-admin-routes-and-keys_length label').removeChild(document.querySelector('#super-admin-routes-and-keys_length label').firstChild);

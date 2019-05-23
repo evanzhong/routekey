@@ -565,6 +565,13 @@
 				$('#super-admin-routes-and-keys').DataTable({
 					// scrollY: 200,
 					// scroller: true, 
+					"columns": [
+						{ "width": "20%" },
+						null,
+						null,
+						null,
+						null
+					]
 				});
 				document.querySelector('#super-admin-routes-and-keys_filter label').removeChild(document.querySelector('#super-admin-routes-and-keys_filter label').firstChild);
 				document.querySelector('#super-admin-routes-and-keys_filter input').placeholder = "Search";

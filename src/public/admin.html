@@ -38,7 +38,7 @@
 			main{
 				display: grid;
 				grid-template-columns: [left-edge] 10vw [col1] 10vw [col2] auto [mid] auto [col3] 10vw [col4] 10vw [right-edge];
-				grid-template-rows: [top-edge] 15vh [row1] auto [row2] auto [bottom-edge];
+				grid-template-rows: [top-edge] 15vh [row1] auto [row2] auto [row3] auto [bottom-edge];
 				grid-gap: 10px;
 				place-items: center stretch;
 				/* place-content: space-between; */
@@ -199,15 +199,15 @@
 				color: blue;
 			}
 			#super-admin-left{
-				grid-column-start: left-edge;
-				grid-column-end: mid;
+				grid-column-start: col1;
+				grid-column-end: col4;
 				grid-row-start: row2;
-				grid-row-end: bottom-edge;
+				grid-row-end: row3;
 			}
 			#super-admin-right{
-				grid-column-start: mid;
-				grid-column-end: right-edge;
-				grid-row-start: row2;
+				grid-column-start: col1;
+				grid-column-end: col4;
+				grid-row-start: row3;
 				grid-row-end: bottom-edge;
 			}
 			/* Tachyons */

@@ -703,6 +703,7 @@
 				.then(() => {
 					$('#super-admin-list-of-keys').DataTable({
 						scroller: true,
+						scrollY: 500,
 					})
 					document.querySelector('#super-admin-list-of-keys_filter label').removeChild(document.querySelector('#super-admin-list-of-keys_filter label').firstChild);
 					document.querySelector('#super-admin-list-of-keys_filter input').placeholder = "Search";

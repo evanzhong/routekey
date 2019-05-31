@@ -701,7 +701,9 @@
 					// console.log(JSON.stringify(body));
 				})
 				.then(() => {
-					$('#super-admin-list-of-keys').DataTable()
+					$('#super-admin-list-of-keys').DataTable({
+						scroller: true,
+					})
 					document.querySelector('#super-admin-list-of-keys_filter label').removeChild(document.querySelector('#super-admin-list-of-keys_filter label').firstChild);
 					document.querySelector('#super-admin-list-of-keys_filter input').placeholder = "Search";
 					document.querySelector('#super-admin-list-of-keys_length label').removeChild(document.querySelector('#super-admin-list-of-keys_length label').firstChild);

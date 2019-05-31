@@ -625,38 +625,38 @@
 					body.sort((a, b) => (a.num > b.num) ? 1 : -1)
 					body.forEach((each) => {
 						// console.log(each)
-						table.insertAdjacentHTML('beforeend', `
-							<tr>
-								<td>
-									${each._id}
-								</td>
 
-								<td>
-									${each.num}
-								</td>
-
-								<td>
-									${each.word}
-								</td>
-
-								<td>
-									${each.inUse}
-								</td>
-
-								<td>
-									${each.isMorrisism}
-								</td>
-
-								<td>
-									${each.adminGenerated}
-								</td>
-
-								<td>
-									${each.usage}
-								</td>
-						`)
+						// TODO figure out a better way to do this b/c I'm really lazy right now
 						if(each.adminGenerated){
 							table.insertAdjacentHTML('beforeend', `
+								<tr>
+									<td>
+										${each._id}
+									</td>
+
+									<td>
+										${each.num}
+									</td>
+
+									<td>
+										${each.word}
+									</td>
+
+									<td>
+										${each.inUse}
+									</td>
+
+									<td>
+										${each.isMorrisism}
+									</td>
+
+									<td>
+										${each.adminGenerated}
+									</td>
+
+									<td>
+										${each.usage}
+									</td>
 									<td>
 										Delete
 									</td>
@@ -664,6 +664,34 @@
 							`)
 						}else{
 							table.insertAdjacentHTML('beforeend', `
+								<tr>
+									<td>
+										${each._id}
+									</td>
+
+									<td>
+										${each.num}
+									</td>
+
+									<td>
+										${each.word}
+									</td>
+
+									<td>
+										${each.inUse}
+									</td>
+
+									<td>
+										${each.isMorrisism}
+									</td>
+
+									<td>
+										${each.adminGenerated}
+									</td>
+
+									<td>
+										${each.usage}
+									</td>		
 									<td>
 									</td>
 								</tr>	

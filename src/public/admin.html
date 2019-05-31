@@ -618,6 +618,7 @@
 								<th>isMorrisism</th>
 								<th>adminGenerated</th>
 								<th>usage</th>
+								<th></th>
 							</tr>
 						</thead>
 					`)
@@ -653,8 +654,21 @@
 								<td>
 									${each.usage}
 								</td>
-							</tr>
 						`)
+						if(each.adminGenerated){
+							table.insertAdjacentHTML('beforeend', `
+									<td>
+										Delete
+									</td>
+								</tr>	
+							`)
+						}else{
+							table.insertAdjacentHTML('beforeend', `
+									<td>
+									</td>
+								</tr>	
+							`)
+						}
 					})
 					// console.log(JSON.stringify(body));
 				})

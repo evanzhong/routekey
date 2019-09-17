@@ -88,6 +88,10 @@ button:focus{
 #notif-link{
   font-size: 20px;
 }
+#modal-cta {
+  width: 50px;
+  height: 50px;
+}
 #morrisism-congrats{
   font-weight: 900;
   font-size: 20px;
@@ -136,6 +140,30 @@ a:visited{
   line-height: 48px;
   font-weight: 500;
   letter-spacing: .21px;
+}
+/* Modal */
+#modal-backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2147483647;
+}
+#modal-window {
+  background-color: lightgray;
+  border-radius: 0.25em;
+  padding: 50px 80px 50px 80px;
+  font-size: 40px;
+}
+#modal-key {
+  font-family: 'Oxygen', sans-serif;
+  font-size: 150px;
+  font-weight: bold;
 }
 /* Tachyons */
 .dim {

@@ -87,7 +87,8 @@ passport.use(new GoogleStrategy(
     let letterRegex = /^[A-Za-z]+$/;
 
     console.log(emailHead)
-    if (profile._json.hd == 'ausdk12.org' && profile._json.email_verified && (emailHead.match(letterRegex) || emailHead == "evanz19" || emailHead == "jonathanl19" || emailHead == "evanzhong10")) {
+    let evanDevOverride = (emailHead == "evanzhong10" && profile._json.hd == 'gmail.com' && profile._json.email_verified)
+    if (profile._json.hd == 'ausdk12.org' && profile._json.email_verified && emailHead.match(letterRegex) || (evanDevOverride)) {
       return done(null, profile)
     }
     else { //TODO: throw an error message when returned to index

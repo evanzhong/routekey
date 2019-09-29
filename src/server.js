@@ -88,7 +88,7 @@ passport.use(new GoogleStrategy(
 
     console.log(emailHead)
     let evanDevOverride = (emailHead == "evanzhong10" && profile._json.hd == 'gmail.com' && profile._json.email_verified)
-    if (profile._json.hd == 'ausdk12.org' && profile._json.email_verified && emailHead.match(letterRegex) || (evanDevOverride)) {
+    if ((profile._json.hd == 'ausdk12.org' && profile._json.email_verified && emailHead.match(letterRegex)) || (evanDevOverride)) {
       return done(null, profile)
     }
     else { //TODO: throw an error message when returned to index

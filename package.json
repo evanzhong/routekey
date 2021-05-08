@@ -24,7 +24,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.16.1",
     "http": "0.0.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "mongodb": "^3.1.13",
     "passport": "^0.4.0",
     "passport-google-oauth": "^2.0.0",
